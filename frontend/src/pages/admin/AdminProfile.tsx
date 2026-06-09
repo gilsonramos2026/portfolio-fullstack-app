@@ -5,13 +5,10 @@ import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import type { Profile } from '../../types'
 import { Save, User } from 'lucide-react'
-import clsx from 'clsx'
+// SOLUÇÃO: 'clsx' removido completamente do topo para satisfazer o ESLint!
 
 export default function AdminProfile() {
   const qc = useQueryClient()
-
-  // Captura a chave de token local para validar as chamadas ao back-end Java
-  const getAdminKey = () => localStorage.getItem('admin_key') || ''
 
   const { data: profile, isLoading } = useQuery({
     queryKey: ['profile'],
@@ -25,13 +22,13 @@ export default function AdminProfile() {
   }, [profile, reset])
 
   const save = useMutation({
-    // CORREÇÃO: Passa a chave administrativa exigida no contrato do método updateProfile()
-    mutationFn: (data: Partial<Profile>) => adminApiService.updateProfile(getAdminKey(), data),
+    // CORREÇÃO: Chamada limpa sem o argumento 'key' redundante, já que o Axios faz isso sozinho pelo interceptor!
+    mutationFn: (data: Partial<Profile>) => adminApiService.updateProfile(data),
     onSuccess: () => {
       toast.success('Perfil atualizado!')
       qc.invalidateQueries({ queryKey: ['profile'] })
     },
-    onError: () => toast.error('Erro ao salvar. Verifique suas credenciais administrativo.'),
+    onError: () => toast.error('Erro ao salvar. Verifique sua conexão.'),
   })
 
   if (isLoading) return <div className="card-glass h-64 animate-pulse rounded-2xl" />
@@ -109,15 +106,15 @@ export default function AdminProfile() {
             </div>
             <div>
               <label className="block text-sm text-slate-400 mb-1.5">GitHub</label>
-              <input {...register('githubUrl')} className="input-field" placeholder="https://github.com/..." />
+              <input {...register('githubUrl')} className="input-field" placeholder="https://github.com..." />
             </div>
             <div>
               <label className="block text-sm text-slate-400 mb-1.5">LinkedIn</label>
-              <input {...register('linkedinUrl')} className="input-field" placeholder="https://linkedin.com/in/..." />
+              <input {...register('linkedinUrl')} className="input-field" placeholder="https://linkedin.com..." />
             </div>
             <div>
               <label className="block text-sm text-slate-400 mb-1.5">Twitter / X</label>
-              <input {...register('twitterUrl')} className="input-field" placeholder="https://x.com/..." />
+              <input {...register('twitterUrl')} className="input-field" placeholder="https://x.com..." />
             </div>
             <div>
               <label className="block text-sm text-slate-400 mb-1.5">Website pessoal</label>

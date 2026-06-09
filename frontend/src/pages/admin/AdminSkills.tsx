@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import type { Skill } from '../../types'
 import { Plus, Pencil, Trash2, X } from 'lucide-react'
-import clsx from 'clsx'
+
 
 const CATEGORIES = ['frontend', 'backend', 'devops', 'database', 'tools', 'soft']
 

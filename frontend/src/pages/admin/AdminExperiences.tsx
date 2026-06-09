@@ -11,8 +11,7 @@ export default function AdminExperiences() {
   const [editing, setEditing] = useState<Experience | null | 'new'>(null)
   const { register, handleSubmit, reset } = useForm<Partial<Experience> & { techInput?: string }>()
 
-  // Captura a chave de token local para validar as chamadas ao back-end Java
-  const getAdminKey = () => localStorage.getItem('admin_key') || ''
+
 
    // CORREÇÃO: Removido o argumento getAdminKey() já que o interceptador do Axios faz isso sozinho!
   const { data: experiences = [], isLoading } = useQuery({
@@ -27,34 +26,35 @@ export default function AdminExperiences() {
   }
   const close = () => { setEditing(null); reset() }
 
+    // CORREÇÃO: Tipado como FormData (Partial de Experience + techInput) e removido a variável key redundante
   const saveMutation = useMutation({
-    mutationFn: (data: any) => {
-      const key = getAdminKey()
+    mutationFn: (data: Partial<Experience> & { techInput?: string }) => {
       const payload = { ...data, technologies: data.techInput?.split(',').map((t: string) => t.trim()).filter(Boolean) }
       delete payload.techInput
       
-      // CORREÇÃO: Repassa o token administrativo (key) exigido nos métodos do Axios/Java
+      // Passa apenas os payloads limpos de acordo com o contrato do Axios/Java
       return editing === 'new'
-        ? adminApiService.createExperience(key, payload)
-        : adminApiService.updateExperience(key, (editing as Experience).id, payload)
+        ? adminApiService.createExperience(payload)
+        : adminApiService.updateExperience((editing as Experience).id, payload)
     },
     onSuccess: () => { 
       toast.success('Salvo!')
       qc.invalidateQueries({ queryKey: ['admin-experiences'] })
       close() 
     },
-    onError: () => toast.error('Erro ao salvar. Verifique as credenciais.'),
+    onError: () => toast.error('Erro ao salvar.'),
   })
 
+  // CORREÇÃO: Remove a passagem de tokens desnecessários na exclusão
   const del = useMutation({
-    // CORREÇÃO: Injeta a chave admin e o ID correspondente da experiência
-    mutationFn: (id: number) => adminApiService.deleteExperience(getAdminKey(), id),
+    mutationFn: adminApiService.deleteExperience, // Passa a referência direta que aceita apenas o ID
     onSuccess: () => { 
       toast.success('Removido!')
       qc.invalidateQueries({ queryKey: ['admin-experiences'] }) 
     },
     onError: () => toast.error('Erro ao remover.'),
   })
+
 
   return (
     <div className="space-y-6">

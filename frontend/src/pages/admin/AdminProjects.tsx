@@ -17,7 +17,7 @@ export default function AdminProjects() {
     queryFn: adminApiService.getProjects,
   })
 
-  const { register, handleSubmit, reset, setValue } = useForm<FormData>()
+  const { register, handleSubmit, reset } = useForm<FormData>()
 
   const openNew = () => {
     setEditing('new')
