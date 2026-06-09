@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { BrowserRouter } from 'react-router-dom'
 import { AppRoutes } from './routes' // Importa a árvore de rotas separada
 
