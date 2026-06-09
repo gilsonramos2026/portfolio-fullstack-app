@@ -14,22 +14,19 @@ export default function AdminLogin() {
     e.preventDefault()
     setLoading(true)
     setError('')
-    try {
-      // Grava temporariamente a chave para o teste de conexão
+        try {
       localStorage.setItem('admin_key', key)
-      
-      // CORREÇÃO: Passa a chave 'key' diretamente como parâmetro exigido no contrato do Axios/Java
-      await adminApiService.countNewContacts(key)
-      
-      // Se o back-end respondeu 200 OK, redireciona com sucesso para o painel
+      // Test o token administrativo
+      await adminApiService.countNewContacts()
       navigate('/admin')
-    } catch (err) {
-      // Se der erro 401/403, limpa a credencial inválida do navegador
+    } catch {
+      // SOLUÇÃO: Removido o '(err)' que o ESLint estava acusando como não utilizado!
       localStorage.removeItem('admin_key')
       setError('Chave inválida. Verifique e tente novamente.')
     } finally {
       setLoading(false)
     }
+
   }
 
   return (

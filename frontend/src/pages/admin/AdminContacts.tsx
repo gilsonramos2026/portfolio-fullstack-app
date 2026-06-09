@@ -24,13 +24,13 @@ export default function AdminContacts() {
   const { data: contacts = [], isLoading } = useQuery({
     queryKey: ['admin-contacts', filter],
     // CORREÇÃO: Passa a chave admin no contrato do método getContacts()
-    queryFn: () => adminApiService.getContacts(getAdminKey(), filter),
+    queryFn: () => adminApiService.getContacts(filter),
   })
 
   const updateStatus = useMutation({
     mutationFn: ({ id, status }: { id: number; status: string }) =>
       // CORREÇÃO: Passa a chave admin no contrato de atualização de status do Java
-      adminApiService.updateContactStatus(getAdminKey(), id, status),
+      adminApiService.updateContactStatus( id, status),
     onSuccess: () => {
       toast.success('Status atualizado!')
       qc.invalidateQueries({ queryKey: ['admin-contacts'] })
