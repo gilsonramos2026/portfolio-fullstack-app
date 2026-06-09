@@ -12,14 +12,12 @@ export default function AdminTestimonials() {
   const [editing, setEditing] = useState<Testimonial | null | 'new'>(null)
   const { register, handleSubmit, reset } = useForm<Partial<Testimonial>>()
 
-  // Captura a chave de token local para validar as chamadas ao back-end Java
-  const getAdminKey = () => localStorage.getItem('admin_key') || ''
-
+   // CORREÇÃO: Removido o argumento getAdminKey() já que o interceptador do Axios faz isso sozinho!
   const { data: testimonials = [], isLoading } = useQuery({
     queryKey: ['admin-testimonials'],
-    // CORREÇÃO: Passa a chave administrativa na consulta protegida
-    queryFn: () => adminApiService.getTestimonials(getAdminKey()),
+    queryFn: adminApiService.getTestimonials, // Chamada direta e limpa sem argumentos
   })
+
 
   const open = (t: Testimonial | 'new') => { setEditing(t); reset(t === 'new' ? { rating: 5, active: true, featured: false } : t) }
   const close = () => { setEditing(null); reset() }
