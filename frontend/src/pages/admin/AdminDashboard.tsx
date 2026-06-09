@@ -11,19 +11,17 @@ const statusColor = (s?: string) =>
   s === 'new' ? 'text-brand-400' : s === 'replied' ? 'text-emerald-400' : 'text-slate-500'
 
 export default function AdminDashboard() {
-  // Captura a chave de token local para validar as chamadas ao back-end Java
-  const getAdminKey = () => localStorage.getItem('admin_key') || ''
-  const key = getAdminKey()
+
 
   // CORREÇÃO: Passa a chave administrativa nas consultas protegidas da API
-  const { data: projects }       = useQuery({ queryKey: ['admin-projects'],      queryFn: () => adminApiService.getProjects(key) })
-  const { data: skills }         = useQuery({ queryKey: ['admin-skills'],        queryFn: () => adminApiService.getSkills(key) })
-  const { data: experiences }    = useQuery({ queryKey: ['admin-experiences'],   queryFn: () => adminApiService.getExperiences(key) })
-  const { data: educations }     = useQuery({ queryKey: ['admin-educations'],    queryFn: () => adminApiService.getEducations(key) })
-  const { data: certifications } = useQuery({ queryKey: ['admin-certs'],        queryFn: () => adminApiService.getCertifications(key) })
-  const { data: testimonials }   = useQuery({ queryKey: ['admin-testimonials'], queryFn: () => adminApiService.getTestimonials(key) })
-  const { data: contacts }       = useQuery({ queryKey: ['admin-contacts'],     queryFn: () => adminApiService.getContacts(key) })
-  const { data: newCount }       = useQuery({ queryKey: ['contacts-count'],     queryFn: () => adminApiService.countNewContacts(key) })
+  const { data: projects }       = useQuery({ queryKey: ['admin-projects'],      queryFn: () => adminApiService.getProjects() })
+  const { data: skills }         = useQuery({ queryKey: ['admin-skills'],        queryFn: () => adminApiService.getSkills() })
+  const { data: experiences }    = useQuery({ queryKey: ['admin-experiences'],   queryFn: () => adminApiService.getExperiences() })
+  const { data: educations }     = useQuery({ queryKey: ['admin-educations'],    queryFn: () => adminApiService.getEducations() })
+  const { data: certifications } = useQuery({ queryKey: ['admin-certs'],        queryFn: () => adminApiService.getCertifications() })
+  const { data: testimonials }   = useQuery({ queryKey: ['admin-testimonials'], queryFn: () => adminApiService.getTestimonials() })
+  const { data: contacts }       = useQuery({ queryKey: ['admin-contacts'],     queryFn: () => adminApiService.getContacts() })
+  const { data: newCount }       = useQuery({ queryKey: ['contacts-count'],     queryFn: () => adminApiService.countNewContacts() })
 
   const stats = [
     { label: 'Projetos',      value: projects?.length       ?? 0, icon: FolderKanban, to: '/admin/projects',      color: 'blue' },

@@ -16,8 +16,7 @@ export default function AdminEducations() {
 
   const { data: educations = [], isLoading } = useQuery({
     queryKey: ['admin-educations'],
-    // CORREÇÃO: Passa a chave admin no contrato do método getEducations()
-    queryFn: () => adminApiService.getEducations(getAdminKey()),
+    queryFn: adminApiService.getEducations, // Chamada direta e limpa como referência da função
   })
 
   const open = (e: Education | 'new') => { setEditing(e); reset(e === 'new' ? {} : e) }

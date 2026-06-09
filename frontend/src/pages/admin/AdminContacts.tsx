@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { adminApiService } from '../../services/api'
 import toast from 'react-hot-toast'
 import type { Contact } from '../../types'
-import { Mail, Clock, CheckCircle2, Archive, MessageCircle, X } from 'lucide-react'
+import { Mail, Clock, X } from 'lucide-react'
 import clsx from 'clsx'
 
 const STATUS_LABELS: Record<string, { label: string; color: string }> = {
@@ -18,8 +18,7 @@ export default function AdminContacts() {
   const [filter, setFilter] = useState<string | undefined>(undefined)
   const [selected, setSelected] = useState<Contact | null>(null)
 
-  // Captura a chave administrativa local para injetar nos métodos de escrita/leitura
-  const getAdminKey = () => localStorage.getItem('admin_key') || ''
+
 
   const { data: contacts = [], isLoading } = useQuery({
     queryKey: ['admin-contacts', filter],
