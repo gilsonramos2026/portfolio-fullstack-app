@@ -1,10 +1,12 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import { AppRoutes } from './routes' // Importa a árvore de rotas separada
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+export default function App() {
+  return (
+    <BrowserRouter>
+      {/* O Roteador fica aqui para alimentar as rotas que isolamos no outro arquivo */}
+      <AppRoutes />
+    </BrowserRouter>
+  )
+}
