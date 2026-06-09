@@ -11,8 +11,6 @@ export default function AdminEducations() {
   const [editing, setEditing] = useState<Education | null | 'new'>(null)
   const { register, handleSubmit, reset } = useForm<Partial<Education>>()
 
-  // Captura a chave administrativa local para injetar nos métodos de escrita/leitura
-  const getAdminKey = () => localStorage.getItem('admin_key') || ''
 
   const { data: educations = [], isLoading } = useQuery({
     queryKey: ['admin-educations'],
@@ -22,31 +20,30 @@ export default function AdminEducations() {
   const open = (e: Education | 'new') => { setEditing(e); reset(e === 'new' ? {} : e) }
   const close = () => { setEditing(null); reset() }
 
+   // CORREÇÃO: Limpeza de argumentos extras na mutação de salvar/atualizar
   const save = useMutation({
-    mutationFn: (data: Partial<Education>) => {
-      const key = getAdminKey()
-      // CORREÇÃO: Passa a chave admin no contrato do serviço Axios/Java
-      return editing === 'new'
-        ? adminApiService.createEducation(key, data)
-        : adminApiService.updateEducation(key, (editing as Education).id, data)
-    },
+    mutationFn: (data: Partial<Education>) =>
+      editing === 'new'
+        ? adminApiService.createEducation(data) // Passa apenas o payload 'data'
+        : adminApiService.updateEducation((editing as Education).id, data), // Passa apenas o id e o payload 'data'
     onSuccess: () => { 
       toast.success('Salvo!')
       qc.invalidateQueries({ queryKey: ['admin-educations'] })
       close() 
     },
-    onError: () => toast.error('Erro ao salvar. Verifique as credenciais.'),
+    onError: () => toast.error('Erro ao salvar.'),
   })
 
+  // CORREÇÃO: Limpeza de argumentos extras na mutação de deletar
   const del = useMutation({
-    // CORREÇÃO: Envolve em uma arrow function para repassar a chave admin e o ID
-    mutationFn: (id: number) => adminApiService.deleteEducation(getAdminKey(), id),
+    mutationFn: adminApiService.deleteEducation, // Passa diretamente a referência do método que aceita apenas o ID
     onSuccess: () => { 
       toast.success('Removido!')
       qc.invalidateQueries({ queryKey: ['admin-educations'] }) 
     },
     onError: () => toast.error('Erro ao remover.'),
   })
+
 
   return (
     <div className="space-y-6">
