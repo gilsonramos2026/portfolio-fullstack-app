@@ -1,4 +1,4 @@
-package com.portifolio.backend.dto.profile;
+package com.portifolio.backend.mapper;
 
 import org.springframework.stereotype.Component;
 import com.portifolio.backend.dto.profile.ProfileRequest;

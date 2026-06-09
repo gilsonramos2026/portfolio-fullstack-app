@@ -8,9 +8,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.portifolio.backend.repository.ProfileRepository;
 import com.portifolio.backend.service.ProfileService;
-import com.portifolio.backend.dto.profile.ProfileMapper;
 import com.portifolio.backend.dto.profile.ProfileRequest;
 import com.portifolio.backend.dto.profile.ProfileResponse;
+import com.portifolio.backend.mapper.ProfileMapper;
 import com.portifolio.backend.model.Profile;
 
 @Service
