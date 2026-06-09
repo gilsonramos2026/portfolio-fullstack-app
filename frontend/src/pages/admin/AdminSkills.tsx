@@ -23,14 +23,13 @@ export default function AdminSkills() {
   const [editing, setEditing] = useState<Skill | null | 'new'>(null)
   const { register, handleSubmit, reset } = useForm<Partial<Skill>>()
 
-  // Captura a chave de token local para validar as chamadas ao back-end Java
-  const getAdminKey = () => localStorage.getItem('admin_key') || ''
 
+    // CORREÇÃO: Removido o argumento getAdminKey() já que o interceptador do Axios faz isso sozinho!
   const { data: skills = [], isLoading } = useQuery({
     queryKey: ['admin-skills'],
-    // CORREÇÃO: Passa a chave administrativa na consulta protegida
-    queryFn: () => adminApiService.getSkills(getAdminKey()),
+    queryFn: adminApiService.getSkills, // Chamada direta e limpa sem argumentos
   })
+
 
   const grouped = skills.reduce((acc, s) => {
     acc[s.category] = [...(acc[s.category] || []), s]
@@ -41,31 +40,30 @@ export default function AdminSkills() {
   const openEdit = (s: Skill) => { setEditing(s); reset(s) }
   const close = () => { setEditing(null); reset() }
 
+    // CORREÇÃO: Remoção de argumentos extras na mutação de salvar/atualizar
   const saveMutation = useMutation({
-    mutationFn: (data: Partial<Skill>) => {
-      const key = getAdminKey()
-      // CORREÇÃO: Repassa o token administrativo (key) exigido nos métodos do Axios/Java
-      return editing === 'new'
-        ? adminApiService.createSkill(key, data)
-        : adminApiService.updateSkill(key, (editing as Skill).id, data)
-    },
+    mutationFn: (data: Partial<Skill>) =>
+      editing === 'new'
+        ? adminApiService.createSkill(data) // Passa apenas o payload 'data'
+        : adminApiService.updateSkill((editing as Skill).id, data), // Passa apenas o id e o payload 'data'
     onSuccess: () => { 
       toast.success('Skill salva!')
       qc.invalidateQueries({ queryKey: ['admin-skills'] })
       close() 
     },
-    onError: () => toast.error('Erro ao salvar. Verifique as credenciais.'),
+    onError: () => toast.error('Erro ao salvar.'),
   })
 
+  // CORREÇÃO: Remoção de argumentos extras na mutação de deletar
   const deleteMutation = useMutation({
-    // CORREÇÃO: Injeta a chave admin e o ID correspondente da skill
-    mutationFn: (id: number) => adminApiService.deleteSkill(getAdminKey(), id),
+    mutationFn: adminApiService.deleteSkill, // Passa diretamente a referência do método que aceita apenas o ID
     onSuccess: () => { 
       toast.success('Skill removida!')
       qc.invalidateQueries({ queryKey: ['admin-skills'] }) 
     },
     onError: () => toast.error('Erro ao remover.'),
   })
+
 
   return (
     <div className="space-y-6">
