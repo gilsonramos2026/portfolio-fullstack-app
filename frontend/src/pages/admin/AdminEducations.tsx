@@ -4,6 +4,7 @@ import { adminApiService } from '../../services/api'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import type { Education } from '../../types'
+import clsx from 'clsx'
 import { Plus, Pencil, Trash2, X, GraduationCap } from 'lucide-react'
 
 export default function AdminEducations() {

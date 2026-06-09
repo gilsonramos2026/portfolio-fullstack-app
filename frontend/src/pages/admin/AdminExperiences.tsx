@@ -14,11 +14,12 @@ export default function AdminExperiences() {
   // Captura a chave de token local para validar as chamadas ao back-end Java
   const getAdminKey = () => localStorage.getItem('admin_key') || ''
 
+   // CORREÇÃO: Removido o argumento getAdminKey() já que o interceptador do Axios faz isso sozinho!
   const { data: experiences = [], isLoading } = useQuery({
     queryKey: ['admin-experiences'],
-    // CORREÇÃO: Passa a chave administrativa na consulta protegida
-    queryFn: () => adminApiService.getExperiences(getAdminKey()),
+    queryFn: adminApiService.getExperiences, // Chamada direta e limpa sem argumentos
   })
+
 
   const open = (e: Experience | 'new') => {
     setEditing(e)
