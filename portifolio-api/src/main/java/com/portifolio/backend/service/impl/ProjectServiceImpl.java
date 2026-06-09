@@ -11,6 +11,8 @@ import com.portifolio.backend.repository.ProjectRepository;
 import com.portifolio.backend.service.ProjectService;
 import com.portifolio.backend.dto.project.ProjectRequest;
 import com.portifolio.backend.dto.project.ProjectResponse;
+import com.portifolio.backend.mapper.ProjectMapper;
+import com.portifolio.backend.model.Project;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
