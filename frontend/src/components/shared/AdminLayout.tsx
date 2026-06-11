@@ -1,58 +1,44 @@
-import { Outlet, NavLink, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { adminApiService } from "../../services/api";
+import { Outlet, NavLink, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { adminApiService } from '../../services/api'
 import {
-  LayoutDashboard,
-  FolderKanban,
-  Zap,
-  Briefcase,
-  GraduationCap,
-  Award,
-  Star,
-  MessageSquare,
-  User,
-  LogOut,
-  Code2,
-  Bell,
-} from "lucide-react";
-import clsx from "clsx";
+  LayoutDashboard, FolderKanban, Zap, Briefcase,
+  GraduationCap, Award, Star, MessageSquare, User,
+  LogOut, Code2, Bell
+} from 'lucide-react'
+import clsx from 'clsx'
 
 const navItems = [
-  { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
-  { to: "/admin/profile", label: "Perfil", icon: User },
-  { to: "/admin/projects", label: "Projetos", icon: FolderKanban },
-  { to: "/admin/skills", label: "Skills", icon: Zap },
-  { to: "/admin/experiences", label: "Experiências", icon: Briefcase },
-  { to: "/admin/educations", label: "Educação", icon: GraduationCap },
-  { to: "/admin/certifications", label: "Certificações", icon: Award },
-  { to: "/admin/testimonials", label: "Testemunhos", icon: Star },
-  {
-    to: "/admin/contacts",
-    label: "Contatos",
-    icon: MessageSquare,
-    badge: true,
-  },
-];
+  { to: '/admin',                label: 'Dashboard',     icon: LayoutDashboard, end: true },
+  { to: '/admin/profile',        label: 'Perfil',        icon: User },
+  { to: '/admin/projects',       label: 'Projetos',      icon: FolderKanban },
+  { to: '/admin/skills',         label: 'Skills',        icon: Zap },
+  { to: '/admin/experiences',    label: 'Experiências',  icon: Briefcase },
+  { to: '/admin/educations',     label: 'Educação',      icon: GraduationCap },
+  { to: '/admin/certifications', label: 'Certificações', icon: Award },
+  { to: '/admin/testimonials',   label: 'Testemunhos',   icon: Star },
+  { to: '/admin/contacts',       label: 'Contatos',      icon: MessageSquare, badge: true },
+]
 
 export default function AdminLayout() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const key = localStorage.getItem("admin_key");
-    if (!key) navigate("/admin/login");
-  }, [navigate]);
+    const key = localStorage.getItem('admin_key')
+    if (!key) navigate('/admin/login')
+  }, [navigate])
 
   const { data: newCount } = useQuery({
-    queryKey: ["contacts-count"],
+    queryKey: ['contacts-count'],
     queryFn: adminApiService.countNewContacts,
     refetchInterval: 30000,
-  });
+  })
 
   const logout = () => {
-    localStorage.removeItem("admin_key");
-    navigate("/admin/login");
-  };
+    localStorage.removeItem('admin_key')
+    navigate('/admin/login')
+  }
 
   return (
     <div className="min-h-screen flex bg-surface-950">
@@ -64,25 +50,23 @@ export default function AdminLayout() {
             <div className="w-7 h-7 rounded-lg bg-brand-500 flex items-center justify-center">
               <Code2 size={14} className="text-white" />
             </div>
-            <span className="font-display font-bold text-white text-sm">
-              Admin Panel
-            </span>
+            <span className="font-display font-bold text-white text-sm">Admin Panel</span>
           </div>
         </div>
 
         {/* Nav */}
         <nav className="flex-1 p-4 space-y-0.5 overflow-y-auto">
-          {navItems.map((item) => (
+          {navItems.map(item => (
             <NavLink
               key={item.to}
               to={item.to}
               end={item.end}
               className={({ isActive }) =>
                 clsx(
-                  "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all",
+                  'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all',
                   isActive
-                    ? "bg-brand-500/20 text-brand-300 border border-brand-500/30"
-                    : "text-slate-400 hover:text-white hover:bg-white/5",
+                    ? 'bg-brand-500/20 text-brand-300 border border-brand-500/30'
+                    : 'text-slate-400 hover:text-white hover:bg-white/5'
                 )
               }
             >
@@ -99,11 +83,8 @@ export default function AdminLayout() {
 
         {/* Footer */}
         <div className="p-4 border-t border-white/10 space-y-1">
-          <NavLink
-            to="/"
-            target="_blank"
-            className="flex items-center gap-3 px-3 py-2 rounded-xl text-xs text-slate-500 hover:text-brand-400 transition-all"
-          >
+          <NavLink to="/" target="_blank"
+            className="flex items-center gap-3 px-3 py-2 rounded-xl text-xs text-slate-500 hover:text-brand-400 transition-all">
             <Code2 size={14} />
             Ver site público ↗
           </NavLink>
@@ -124,13 +105,10 @@ export default function AdminLayout() {
           <p className="text-slate-400 text-sm">Painel Administrativo</p>
           <div className="flex items-center gap-4">
             {newCount && newCount.count > 0 && (
-              <NavLink
-                to="/admin/contacts"
-                className="flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 transition-colors"
-              >
+              <NavLink to="/admin/contacts"
+                className="flex items-center gap-1.5 text-xs text-amber-400 hover:text-amber-300 transition-colors">
                 <Bell size={13} />
-                {newCount.count} mensagem{newCount.count > 1 ? "s" : ""} nova
-                {newCount.count > 1 ? "s" : ""}
+                {newCount.count} mensagem{newCount.count > 1 ? 's' : ''} nova{newCount.count > 1 ? 's' : ''}
               </NavLink>
             )}
           </div>
@@ -142,5 +120,5 @@ export default function AdminLayout() {
         </main>
       </div>
     </div>
-  );
+  )
 }

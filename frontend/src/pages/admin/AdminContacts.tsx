@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { adminApiService } from '../../services/api'
 import toast from 'react-hot-toast'
 import type { Contact } from '../../types'
-import { Mail, Clock, X } from 'lucide-react'
+import { Mail, Clock,  X } from 'lucide-react'
 import clsx from 'clsx'
 
 const STATUS_LABELS: Record<string, { label: string; color: string }> = {
@@ -18,24 +18,19 @@ export default function AdminContacts() {
   const [filter, setFilter] = useState<string | undefined>(undefined)
   const [selected, setSelected] = useState<Contact | null>(null)
 
-
-
   const { data: contacts = [], isLoading } = useQuery({
     queryKey: ['admin-contacts', filter],
-    // CORREÇÃO: Passa a chave admin no contrato do método getContacts()
     queryFn: () => adminApiService.getContacts(filter),
   })
 
   const updateStatus = useMutation({
     mutationFn: ({ id, status }: { id: number; status: string }) =>
-      // CORREÇÃO: Passa a chave admin no contrato de atualização de status do Java
-      adminApiService.updateContactStatus( id, status),
+      adminApiService.updateContactStatus(id, status),
     onSuccess: () => {
       toast.success('Status atualizado!')
       qc.invalidateQueries({ queryKey: ['admin-contacts'] })
       qc.invalidateQueries({ queryKey: ['contacts-count'] })
     },
-    onError: () => toast.error('Erro ao atualizar status.'),
   })
 
   const filters = ['new', 'read', 'replied', 'archived']
@@ -74,7 +69,7 @@ export default function AdminContacts() {
                 <div className="flex items-start gap-3 flex-1 min-w-0">
                   <div className={clsx('w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-sm',
                     c.status === 'new' ? 'bg-brand-500/20 text-brand-400' : 'bg-white/5 text-slate-400')}>
-                    {c.name ? c.name[0] : 'U'}
+                    {c.name[0]}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
@@ -115,7 +110,7 @@ export default function AdminContacts() {
                   {selected.phone && <span>{selected.phone}</span>}
                 </div>
               </div>
-              <button onClick={() => setSelected(null)} aria-label="Fechar"><X size={20} className="text-slate-400 hover:text-white" /></button>
+              <button onClick={() => setSelected(null)}><X size={20} className="text-slate-400 hover:text-white" /></button>
             </div>
 
             {selected.subject && (
@@ -146,10 +141,10 @@ export default function AdminContacts() {
               </div>
             </div>
 
-            <div className="flex gap-3 pt-4 border-t border-white/5">
+            <div className="flex gap-3">
               <a href={`mailto:${selected.email}?subject=Re: ${selected.subject ?? ''}`}
-                className="btn-primary text-sm py-2 px-4 flex items-center justify-center gap-2 flex-1">
-                <Mail size={14} /> Responder por E-mail
+                className="btn-primary text-sm py-2 px-4">
+                <Mail size={14} /> Responder
               </a>
               <button onClick={() => setSelected(null)} className="btn-outline text-sm py-2 px-4">Fechar</button>
             </div>

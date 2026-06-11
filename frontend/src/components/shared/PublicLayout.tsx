@@ -1,68 +1,63 @@
-import { Outlet, NavLink, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { publicApi } from "../../services/api";
-import { Menu, X, Github, Linkedin, Mail, Code2 } from "lucide-react";
-import clsx from "clsx";
+import { Outlet, NavLink, Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { publicApi } from '../../services/api'
+import { Menu, X, Github, Linkedin, Mail, Code2 } from 'lucide-react'
+import clsx from 'clsx'
 
 export default function PublicLayout() {
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   const { data: profile } = useQuery({
-    queryKey: ["profile"],
+    queryKey: ['profile'],
     queryFn: publicApi.getProfile,
-  });
+  })
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handler);
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
+    const handler = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', handler)
+    return () => window.removeEventListener('scroll', handler)
+  }, [])
 
   const links = [
-    { to: "/", label: "Início" },
-    { to: "/projects", label: "Projetos" },
-    { to: "/about", label: "Sobre" },
-    { to: "/contact", label: "Contato" },
-  ];
+    { to: '/', label: 'Início' },
+    { to: '/projects', label: 'Projetos' },
+    { to: '/about', label: 'Sobre' },
+    { to: '/contact', label: 'Contato' },
+  ]
 
   return (
     <div className="min-h-screen flex flex-col">
       {/* NAVBAR */}
       <header
         className={clsx(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
           scrolled
-            ? "bg-surface-900/90 backdrop-blur-md border-b border-white/10 shadow-xl"
-            : "bg-transparent",
+            ? 'bg-surface-900/90 backdrop-blur-md border-b border-white/10 shadow-xl'
+            : 'bg-transparent'
         )}
       >
         <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          {/* Logo */}
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <div className="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center group-hover:bg-brand-400 transition-colors">
               <Code2 size={16} className="text-white" />
             </div>
             <span className="font-display font-bold text-lg text-white">
-              {/* SOLUÇÃO: Lê o nome de forma segura, se não existir exibe apenas 'Dev' sem estourar o split */}
-              {profile && profile.name ? profile.name.split(" ")[0] : "Dev"}
+              {profile?.name?.split(' ')[0] ?? 'Dev'}
             </span>
           </Link>
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-8">
-            {links.map((l) => (
+            {links.map(l => (
               <NavLink
                 key={l.to}
                 to={l.to}
-                end={l.to === "/"}
+                end={l.to === '/'}
                 className={({ isActive }) =>
-                  clsx(
-                    "nav-link text-sm pb-1",
-                    isActive && "text-white after:w-full",
-                  )
+                  clsx('nav-link text-sm pb-1', isActive && 'text-white after:w-full')
                 }
               >
                 {l.label}
@@ -73,22 +68,14 @@ export default function PublicLayout() {
           {/* Social + CTA */}
           <div className="hidden md:flex items-center gap-3">
             {profile?.githubUrl && (
-              <a
-                href={profile.githubUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 text-slate-400 hover:text-white transition-colors"
-              >
+              <a href={profile.githubUrl} target="_blank" rel="noreferrer"
+                className="p-2 text-slate-400 hover:text-white transition-colors">
                 <Github size={18} />
               </a>
             )}
             {profile?.linkedinUrl && (
-              <a
-                href={profile.linkedinUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 text-slate-400 hover:text-white transition-colors"
-              >
+              <a href={profile.linkedinUrl} target="_blank" rel="noreferrer"
+                className="p-2 text-slate-400 hover:text-white transition-colors">
                 <Linkedin size={18} />
               </a>
             )}
@@ -110,17 +97,14 @@ export default function PublicLayout() {
         {/* Mobile menu */}
         {open && (
           <div className="md:hidden bg-surface-900/95 backdrop-blur-md border-b border-white/10 px-6 py-4 flex flex-col gap-3">
-            {links.map((l) => (
+            {links.map(l => (
               <NavLink
                 key={l.to}
                 to={l.to}
-                end={l.to === "/"}
+                end={l.to === '/'}
                 onClick={() => setOpen(false)}
                 className={({ isActive }) =>
-                  clsx(
-                    "text-sm font-medium py-2",
-                    isActive ? "text-white" : "text-slate-400",
-                  )
+                  clsx('text-sm font-medium py-2', isActive ? 'text-white' : 'text-slate-400')
                 }
               >
                 {l.label}
@@ -139,43 +123,24 @@ export default function PublicLayout() {
       <footer className="border-t border-white/10 py-10 mt-20">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-slate-500 text-sm">
-            {/* SOLUÇÃO: Fallback seguro se o perfil estiver vazio */}©{" "}
-            {new Date().getFullYear()}{" "}
-            {profile && profile.name ? profile.name : "Portfólio"} · Feito com
-            ☕
+            © {new Date().getFullYear()} {profile?.name ?? 'Portfólio'} · Feito com ☕ e muito código
           </div>
           <div className="flex items-center gap-4">
             {profile?.githubUrl && (
-              <a
-                href={profile.githubUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="text-slate-500 hover:text-white transition-colors"
-              >
-                <Github size={18} />
-              </a>
+              <a href={profile.githubUrl} target="_blank" rel="noreferrer"
+                className="text-slate-500 hover:text-white transition-colors"><Github size={18} /></a>
             )}
             {profile?.linkedinUrl && (
-              <a
-                href={profile.linkedinUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="text-slate-500 hover:text-white transition-colors"
-              >
-                <Linkedin size={18} />
-              </a>
+              <a href={profile.linkedinUrl} target="_blank" rel="noreferrer"
+                className="text-slate-500 hover:text-white transition-colors"><Linkedin size={18} /></a>
             )}
             {profile?.email && (
-              <a
-                href={`mailto:${profile.email}`}
-                className="text-slate-500 hover:text-white transition-colors"
-              >
-                <Mail size={18} />
-              </a>
+              <a href={`mailto:${profile.email}`}
+                className="text-slate-500 hover:text-white transition-colors"><Mail size={18} /></a>
             )}
           </div>
         </div>
       </footer>
     </div>
-  );
+  )
 }

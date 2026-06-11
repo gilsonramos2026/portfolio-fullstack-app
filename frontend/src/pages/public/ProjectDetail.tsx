@@ -241,7 +241,7 @@ export default function ProjectDetail() {
   )
 
   const status = STATUS_MAP[project.status as keyof typeof STATUS_MAP] ?? STATUS_MAP.completed
-  const StatusIcon = status.icon
+  // const StatusIcon = status.icon
   const hasImages = project.images && project.images.length > 0
 
   // Mescla thumbnail como primeira imagem se não houver imagens próprias

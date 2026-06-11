@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { adminApiService } from '../../services/api'
 import { Code2, Lock, Eye, EyeOff } from 'lucide-react'
@@ -14,19 +14,17 @@ export default function AdminLogin() {
     e.preventDefault()
     setLoading(true)
     setError('')
-        try {
+    try {
       localStorage.setItem('admin_key', key)
-      // Test o token administrativo
+      // Test the key
       await adminApiService.countNewContacts()
       navigate('/admin')
     } catch {
-      // SOLUÇÃO: Removido o '(err)' que o ESLint estava acusando como não utilizado!
       localStorage.removeItem('admin_key')
       setError('Chave inválida. Verifique e tente novamente.')
     } finally {
       setLoading(false)
     }
-
   }
 
   return (
@@ -43,7 +41,7 @@ export default function AdminLogin() {
 
         <form onSubmit={handleLogin} className="card-glass p-8 space-y-5">
           <div>
-            <label className="block text-sm text-slate-400 mb-2 flex items-center gap-1.5 selection:bg-transparent">
+            <label className="block text-sm text-slate-400 mb-2 flex items-center gap-1.5">
               <Lock size={13} /> Chave de Acesso
             </label>
             <div className="relative">
@@ -56,15 +54,14 @@ export default function AdminLogin() {
                 required
               />
               <button type="button" onClick={() => setShow(!show)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors"
-                aria-label={show ? "Ocultar chave" : "Mostrar chave"}>
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white">
                 {show ? <EyeOff size={16} /> : <Eye size={16} />}
               </button>
             </div>
           </div>
 
           {error && (
-            <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/25 text-red-400 text-sm animate-in">
+            <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/25 text-red-400 text-sm">
               {error}
             </div>
           )}
@@ -74,11 +71,10 @@ export default function AdminLogin() {
           </button>
 
           <p className="text-center text-xs text-slate-600">
-            Configure a chave em <code className="text-slate-500">secret-key</code> no seu application.yml do backend.
+            Configure a chave em <code className="text-slate-500">ADMIN_SECRET</code> no backend.
           </p>
         </form>
       </div>
     </div>
   )
 }
-

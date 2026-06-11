@@ -42,7 +42,7 @@ export default function AdminCertifications() {
 
       {isLoading ? <div className="card-glass h-48 animate-pulse" /> : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {certs.map((c) => (
+          {certs.map((c, i) => (
             <div key={c.id} className="card-glass p-5 space-y-3">
               <div className="flex items-start gap-3">
                 <Award size={18} className="text-brand-400 flex-shrink-0 mt-0.5" />
