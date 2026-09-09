@@ -1,5 +1,6 @@
 package com.portfolio.domain;
 
+import com.portfolio.domain.enums.ContactMessageStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
