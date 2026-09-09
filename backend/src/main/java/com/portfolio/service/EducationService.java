@@ -1,4 +1,4 @@
-package com.portfolio.service.impl;
+package com.portfolio.service;
 
 import com.portfolio.backend.dto.education.EducationRequestDTO;
 import com.portfolio.backend.dto.education.EducationResponseDTO;
