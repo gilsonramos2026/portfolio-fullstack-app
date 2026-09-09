@@ -1,6 +1,6 @@
 package com.portfolio.dto.project;
 
-import com.portfolio.backend.domain.ProjectStatus;
+import com.portfolio.domain.enums.ProjectStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 

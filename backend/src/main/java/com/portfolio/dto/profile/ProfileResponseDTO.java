@@ -1,6 +1,6 @@
 package com.portfolio.dto.profile;
 
-import com.portfolio.backend.dto.address.AddressResponseDTO;
+import com.portfolio.dto.address.AddressResponseDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;

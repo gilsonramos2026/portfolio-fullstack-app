@@ -1,6 +1,6 @@
 package com.portfolio.dto.contact;
 
-import com.portfolio.backend.domain.ContactMessageStatus;
+import com.portfolio.domain.enums.ContactMessageStatus;
 import jakarta.validation.constraints.NotNull;
 
 public record ContactMessageStatusUpdateDTO(

@@ -1,7 +1,8 @@
 package com.portfolio.service;
 
-import com.portfolio.backend.dto.profile.ProfileRequestDTO;
-import com.portfolio.backend.dto.profile.ProfileResponseDTO;
+
+import com.portfolio.dto.profile.ProfileRequestDTO;
+import com.portfolio.dto.profile.ProfileResponseDTO;
 
 /**
  * Regras de negócio para o perfil (dados pessoais e foto).

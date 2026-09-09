@@ -1,8 +1,8 @@
 package com.portfolio.service.impl;
 
-import com.portfolio.backend.domain.UploadKind;
-import com.portfolio.backend.exception.FileStorageException;
-import com.portfolio.backend.service.FileStorageService;
+import com.portfolio.domain.enums.UploadKind;
+import com.portfolio.exception.FileStorageException;
+import com.portfolio.service.FileStorageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

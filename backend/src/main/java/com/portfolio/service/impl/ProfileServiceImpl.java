@@ -1,11 +1,11 @@
 package com.portfolio.service.impl;
 
-import com.portfolio.backend.domain.Profile;
-import com.portfolio.backend.dto.profile.ProfileRequestDTO;
-import com.portfolio.backend.dto.profile.ProfileResponseDTO;
-import com.portfolio.backend.mapper.ProfileMapper;
-import com.portfolio.backend.repository.ProfileRepository;
-import com.portfolio.backend.service.ProfileService;
+import com.portfolio.domain.Profile;
+import com.portfolio.dto.profile.ProfileRequestDTO;
+import com.portfolio.dto.profile.ProfileResponseDTO;
+import com.portfolio.mapper.ProfileMapper;
+import com.portfolio.repository.ProfileRepository;
+import com.portfolio.service.ProfileService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

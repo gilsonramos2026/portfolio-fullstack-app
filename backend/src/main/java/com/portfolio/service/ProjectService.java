@@ -1,7 +1,7 @@
 package com.portfolio.service;
 
-import com.portfolio.backend.dto.project.ProjectRequestDTO;
-import com.portfolio.backend.dto.project.ProjectResponseDTO;
+import com.portfolio.dto.project.ProjectRequestDTO;
+import com.portfolio.dto.project.ProjectResponseDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

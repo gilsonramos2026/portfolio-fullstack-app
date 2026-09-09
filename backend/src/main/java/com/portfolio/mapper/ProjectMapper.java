@@ -1,9 +1,9 @@
 package com.portfolio.mapper;
 
-import com.portfolio.backend.domain.Project;
-import com.portfolio.backend.dto.project.ProjectImageResponseDTO;
-import com.portfolio.backend.dto.project.ProjectRequestDTO;
-import com.portfolio.backend.dto.project.ProjectResponseDTO;
+import com.portfolio.domain.Project;
+import com.portfolio.dto.project.ProjectImageResponseDTO;
+import com.portfolio.dto.project.ProjectRequestDTO;
+import com.portfolio.dto.project.ProjectResponseDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

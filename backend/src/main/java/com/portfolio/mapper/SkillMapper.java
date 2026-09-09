@@ -1,8 +1,8 @@
 package com.portfolio.mapper;
 
-import com.portfolio.backend.domain.Skill;
-import com.portfolio.backend.dto.skill.SkillRequestDTO;
-import com.portfolio.backend.dto.skill.SkillResponseDTO;
+import com.portfolio.domain.Skill;
+import com.portfolio.dto.skill.SkillRequestDTO;
+import com.portfolio.dto.skill.SkillResponseDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

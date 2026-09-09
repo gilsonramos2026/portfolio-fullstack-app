@@ -1,7 +1,8 @@
 package com.portfolio.service;
 
-import com.portfolio.backend.dto.address.AddressRequestDTO;
-import com.portfolio.backend.dto.address.AddressResponseDTO;
+
+import com.portfolio.dto.address.AddressRequestDTO;
+import com.portfolio.dto.address.AddressResponseDTO;
 
 import java.util.List;
 

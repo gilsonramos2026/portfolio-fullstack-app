@@ -1,12 +1,12 @@
 package com.portfolio.service.impl;
 
-import com.portfolio.backend.domain.Certification;
-import com.portfolio.backend.dto.certification.CertificationRequestDTO;
-import com.portfolio.backend.dto.certification.CertificationResponseDTO;
-import com.portfolio.backend.exception.ResourceNotFoundException;
-import com.portfolio.backend.mapper.CertificationMapper;
-import com.portfolio.backend.repository.CertificationRepository;
-import com.portfolio.backend.service.CertificationService;
+import com.portfolio.domain.Certification;
+import com.portfolio.dto.certification.CertificationRequestDTO;
+import com.portfolio.dto.certification.CertificationResponseDTO;
+import com.portfolio.exception.ResourceNotFoundException;
+import com.portfolio.mapper.CertificationMapper;
+import com.portfolio.repository.CertificationRepository;
+import com.portfolio.service.CertificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

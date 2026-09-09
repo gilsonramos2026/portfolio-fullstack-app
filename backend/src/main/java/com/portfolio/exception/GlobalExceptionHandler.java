@@ -1,6 +1,6 @@
 package com.portfolio.exception;
 
-import com.portfolio.backend.dto.error.ApiErrorResponse;
+import com.portfolio.dto.error.ApiErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ApiErrorResponse> handleResourceNotFound(ResourceNotFoundException ex,
-                                                                     HttpServletRequest request) {
+                                                                   HttpServletRequest request) {
         ApiErrorResponse body = ApiErrorResponse.of(
                 HttpStatus.NOT_FOUND.value(),
                 HttpStatus.NOT_FOUND.getReasonPhrase(),

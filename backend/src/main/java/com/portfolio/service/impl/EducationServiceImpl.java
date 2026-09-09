@@ -1,12 +1,12 @@
 package com.portfolio.service.impl;
 
-import com.portfolio.backend.domain.Education;
-import com.portfolio.backend.dto.education.EducationRequestDTO;
-import com.portfolio.backend.dto.education.EducationResponseDTO;
-import com.portfolio.backend.exception.ResourceNotFoundException;
-import com.portfolio.backend.mapper.EducationMapper;
-import com.portfolio.backend.repository.EducationRepository;
-import com.portfolio.backend.service.EducationService;
+import com.portfolio.domain.Education;
+import com.portfolio.dto.education.EducationRequestDTO;
+import com.portfolio.dto.education.EducationResponseDTO;
+import com.portfolio.exception.ResourceNotFoundException;
+import com.portfolio.mapper.EducationMapper;
+import com.portfolio.repository.EducationRepository;
+import com.portfolio.service.EducationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

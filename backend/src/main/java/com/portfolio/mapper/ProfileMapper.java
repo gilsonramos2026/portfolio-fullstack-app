@@ -1,8 +1,8 @@
 package com.portfolio.mapper;
 
-import com.portfolio.backend.domain.Profile;
-import com.portfolio.backend.dto.profile.ProfileRequestDTO;
-import com.portfolio.backend.dto.profile.ProfileResponseDTO;
+import com.portfolio.domain.Profile;
+import com.portfolio.dto.profile.ProfileRequestDTO;
+import com.portfolio.dto.profile.ProfileResponseDTO;
 import org.springframework.stereotype.Component;
 
 @Component

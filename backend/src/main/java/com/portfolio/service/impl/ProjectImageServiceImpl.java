@@ -1,15 +1,15 @@
 package com.portfolio.service.impl;
 
-import com.portfolio.backend.domain.Project;
-import com.portfolio.backend.domain.ProjectImage;
-import com.portfolio.backend.domain.UploadKind;
-import com.portfolio.backend.dto.project.ProjectImageResponseDTO;
-import com.portfolio.backend.exception.BusinessException;
-import com.portfolio.backend.exception.ResourceNotFoundException;
-import com.portfolio.backend.repository.ProjectImageRepository;
-import com.portfolio.backend.repository.ProjectRepository;
-import com.portfolio.backend.service.FileStorageService;
-import com.portfolio.backend.service.ProjectImageService;
+import com.portfolio.domain.Project;
+import com.portfolio.domain.ProjectImage;
+import com.portfolio.domain.enums.UploadKind;
+import com.portfolio.dto.project.ProjectImageResponseDTO;
+import com.portfolio.exception.BusinessException;
+import com.portfolio.exception.ResourceNotFoundException;
+import com.portfolio.repository.ProjectImageRepository;
+import com.portfolio.repository.ProjectRepository;
+import com.portfolio.service.FileStorageService;
+import com.portfolio.service.ProjectImageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,6 +1,6 @@
 package com.portfolio.repository;
 
-import com.portfolio.backend.domain.Education;
+import com.portfolio.domain.Education;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

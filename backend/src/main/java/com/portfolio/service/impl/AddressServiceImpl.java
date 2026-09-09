@@ -1,14 +1,14 @@
 package com.portfolio.service.impl;
 
-import com.portfolio.backend.domain.Address;
-import com.portfolio.backend.domain.Profile;
-import com.portfolio.backend.dto.address.AddressRequestDTO;
-import com.portfolio.backend.dto.address.AddressResponseDTO;
-import com.portfolio.backend.exception.ResourceNotFoundException;
-import com.portfolio.backend.mapper.AddressMapper;
-import com.portfolio.backend.repository.AddressRepository;
-import com.portfolio.backend.repository.ProfileRepository;
-import com.portfolio.backend.service.AddressService;
+import com.portfolio.domain.Address;
+import com.portfolio.domain.Profile;
+import com.portfolio.dto.address.AddressRequestDTO;
+import com.portfolio.dto.address.AddressResponseDTO;
+import com.portfolio.exception.ResourceNotFoundException;
+import com.portfolio.mapper.AddressMapper;
+import com.portfolio.repository.AddressRepository;
+import com.portfolio.repository.ProfileRepository;
+import com.portfolio.service.AddressService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

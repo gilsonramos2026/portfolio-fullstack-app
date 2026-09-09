@@ -1,12 +1,12 @@
 package com.portfolio.service.impl;
 
-import com.portfolio.backend.domain.Project;
-import com.portfolio.backend.dto.project.ProjectRequestDTO;
-import com.portfolio.backend.dto.project.ProjectResponseDTO;
-import com.portfolio.backend.exception.ResourceNotFoundException;
-import com.portfolio.backend.mapper.ProjectMapper;
-import com.portfolio.backend.repository.ProjectRepository;
-import com.portfolio.backend.service.ProjectService;
+import com.portfolio.domain.Project;
+import com.portfolio.dto.project.ProjectRequestDTO;
+import com.portfolio.dto.project.ProjectResponseDTO;
+import com.portfolio.exception.ResourceNotFoundException;
+import com.portfolio.mapper.ProjectMapper;
+import com.portfolio.repository.ProjectRepository;
+import com.portfolio.service.ProjectService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

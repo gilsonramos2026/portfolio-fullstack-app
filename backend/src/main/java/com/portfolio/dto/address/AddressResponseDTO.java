@@ -1,6 +1,6 @@
 package com.portfolio.dto.address;
 
-import com.portfolio.backend.domain.AddressType;
+import com.portfolio.domain.enums.AddressType;
 
 import java.time.LocalDateTime;
 

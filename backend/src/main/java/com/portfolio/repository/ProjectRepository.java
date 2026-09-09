@@ -1,7 +1,7 @@
 package com.portfolio.repository;
 
-import com.portfolio.backend.domain.Project;
-import com.portfolio.backend.domain.ProjectStatus;
+import com.portfolio.domain.Project;
+import com.portfolio.domain.enums.ProjectStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

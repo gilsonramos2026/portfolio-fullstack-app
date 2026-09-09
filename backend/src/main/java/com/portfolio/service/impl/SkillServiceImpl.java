@@ -1,12 +1,12 @@
 package com.portfolio.service.impl;
 
-import com.portfolio.backend.domain.Skill;
-import com.portfolio.backend.dto.skill.SkillRequestDTO;
-import com.portfolio.backend.dto.skill.SkillResponseDTO;
-import com.portfolio.backend.exception.ResourceNotFoundException;
-import com.portfolio.backend.mapper.SkillMapper;
-import com.portfolio.backend.repository.SkillRepository;
-import com.portfolio.backend.service.SkillService;
+import com.portfolio.domain.Skill;
+import com.portfolio.dto.skill.SkillRequestDTO;
+import com.portfolio.dto.skill.SkillResponseDTO;
+import com.portfolio.exception.ResourceNotFoundException;
+import com.portfolio.mapper.SkillMapper;
+import com.portfolio.repository.SkillRepository;
+import com.portfolio.service.SkillService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,7 +1,7 @@
 package com.portfolio.service;
 
-import com.portfolio.backend.dto.certification.CertificationRequestDTO;
-import com.portfolio.backend.dto.certification.CertificationResponseDTO;
+import com.portfolio.dto.certification.CertificationRequestDTO;
+import com.portfolio.dto.certification.CertificationResponseDTO;
 
 import java.util.List;
 

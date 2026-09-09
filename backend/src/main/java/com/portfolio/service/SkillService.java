@@ -1,7 +1,7 @@
 package com.portfolio.service;
 
-import com.portfolio.backend.dto.skill.SkillRequestDTO;
-import com.portfolio.backend.dto.skill.SkillResponseDTO;
+import com.portfolio.dto.skill.SkillRequestDTO;
+import com.portfolio.dto.skill.SkillResponseDTO;
 
 import java.util.List;
 

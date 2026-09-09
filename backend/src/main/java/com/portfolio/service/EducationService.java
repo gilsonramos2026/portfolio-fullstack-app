@@ -1,7 +1,7 @@
 package com.portfolio.service;
 
-import com.portfolio.backend.dto.education.EducationRequestDTO;
-import com.portfolio.backend.dto.education.EducationResponseDTO;
+import com.portfolio.dto.education.EducationRequestDTO;
+import com.portfolio.dto.education.EducationResponseDTO;
 
 import java.util.List;
 

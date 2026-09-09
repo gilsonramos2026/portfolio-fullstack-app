@@ -1,8 +1,8 @@
 package com.portfolio.mapper;
 
-import com.portfolio.backend.domain.Certification;
-import com.portfolio.backend.dto.certification.CertificationRequestDTO;
-import com.portfolio.backend.dto.certification.CertificationResponseDTO;
+import com.portfolio.domain.Certification;
+import com.portfolio.dto.certification.CertificationRequestDTO;
+import com.portfolio.dto.certification.CertificationResponseDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

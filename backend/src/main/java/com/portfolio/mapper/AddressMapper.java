@@ -1,9 +1,9 @@
 package com.portfolio.mapper;
 
-import com.portfolio.backend.domain.Address;
-import com.portfolio.backend.domain.Profile;
-import com.portfolio.backend.dto.address.AddressRequestDTO;
-import com.portfolio.backend.dto.address.AddressResponseDTO;
+import com.portfolio.domain.Address;
+import com.portfolio.domain.Profile;
+import com.portfolio.dto.address.AddressRequestDTO;
+import com.portfolio.dto.address.AddressResponseDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

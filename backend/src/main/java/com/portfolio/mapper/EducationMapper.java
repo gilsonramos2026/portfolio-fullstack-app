@@ -1,8 +1,8 @@
 package com.portfolio.mapper;
 
-import com.portfolio.backend.domain.Education;
-import com.portfolio.backend.dto.education.EducationRequestDTO;
-import com.portfolio.backend.dto.education.EducationResponseDTO;
+import com.portfolio.domain.Education;
+import com.portfolio.dto.education.EducationRequestDTO;
+import com.portfolio.dto.education.EducationResponseDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

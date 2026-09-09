@@ -1,6 +1,6 @@
 package com.portfolio.service;
 
-import com.portfolio.backend.domain.UploadKind;
+import com.portfolio.domain.enums.UploadKind;
 import org.springframework.web.multipart.MultipartFile;
 
 /**

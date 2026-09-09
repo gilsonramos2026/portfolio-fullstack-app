@@ -1,8 +1,8 @@
 package com.portfolio.service;
 
-import com.portfolio.backend.domain.ContactMessageStatus;
-import com.portfolio.backend.dto.contact.ContactMessageRequestDTO;
-import com.portfolio.backend.dto.contact.ContactMessageResponseDTO;
+import com.portfolio.domain.enums.ContactMessageStatus;
+import com.portfolio.dto.contact.ContactMessageRequestDTO;
+import com.portfolio.dto.contact.ContactMessageResponseDTO;
 
 import java.util.List;
 

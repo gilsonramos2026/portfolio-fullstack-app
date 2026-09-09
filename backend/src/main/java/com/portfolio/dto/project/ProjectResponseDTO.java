@@ -1,6 +1,6 @@
 package com.portfolio.dto.project;
 
-import com.portfolio.backend.domain.ProjectStatus;
+import com.portfolio.domain.enums.ProjectStatus;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

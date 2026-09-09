@@ -1,6 +1,5 @@
 package com.portfolio.service;
-
-import com.portfolio.backend.dto.project.ProjectImageResponseDTO;
+import com.portfolio.dto.project.ProjectImageResponseDTO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

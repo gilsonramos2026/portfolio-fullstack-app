@@ -1,8 +1,9 @@
 package com.portfolio.mapper;
 
-import com.portfolio.backend.domain.ContactMessage;
-import com.portfolio.backend.dto.contact.ContactMessageRequestDTO;
-import com.portfolio.backend.dto.contact.ContactMessageResponseDTO;
+import com.portfolio.domain.ContactMessage;
+import com.portfolio.domain.enums.ContactMessageStatus;
+import com.portfolio.dto.contact.ContactMessageRequestDTO;
+import com.portfolio.dto.contact.ContactMessageResponseDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class ContactMessageMapper {
                 .name(dto.name())
                 .email(dto.email())
                 .message(dto.message())
-                .status(com.portfolio.backend.domain.ContactMessageStatus.NEW)
+                .status(ContactMessageStatus.NEW)
                 .build();
     }
 
