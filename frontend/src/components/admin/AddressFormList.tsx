@@ -1,16 +1,11 @@
 import toast from "react-hot-toast";
 import { useState, type FormEvent } from "react";
 import { Pencil, Star, Trash2 } from "lucide-react";
-import {
-  useAddresses,
-  useCreateAddress,
-  useDeleteAddress,
-  useUpdateAddress,
-} from "@/hooks/useAddresses";
-import { Input } from "@/components/ui/Input";
-import { Button } from "@/components/ui/Button";
-import { Skeleton } from "@/components/ui/Skeleton";
-import { ADDRESS_TYPE_LABEL, type Address, type AddressPayload, type AddressType } from "@/types/address";
+import { ADDRESS_TYPE_LABEL, type Address, type AddressPayload, type AddressType } from "../../types/address";
+import { useAddresses, useCreateAddress, useDeleteAddress, useUpdateAddress } from "../../hooks/useAddresses";
+import { Input } from "../ui/Input";
+import { Button } from "../ui/Button";
+import { Skeleton } from "../ui/Skeleton";
 
 const EMPTY_FORM: AddressPayload = {
   type: "RESIDENTIAL",
@@ -26,7 +21,7 @@ const EMPTY_FORM: AddressPayload = {
 };
 
 export function AddressFormList() {
-  const { data: addresses, isLoading } = useAddresses();
+  const { data: addresses, isLoading } = useAddresses() as { data: Address[] | undefined; isLoading: boolean };
   const createAddress = useCreateAddress();
   const updateAddress = useUpdateAddress();
   const deleteAddress = useDeleteAddress();
@@ -112,7 +107,7 @@ export function AddressFormList() {
               type="checkbox"
               checked={form.primaryAddress}
               onChange={(e) => updateField("primaryAddress", e.target.checked)}
-              className="h-4 w-4 accent-(--color-brand-500)"
+              className="h-4 w-4 accent-brand-500"
             />
             Definir como principal
           </label>
@@ -185,7 +180,7 @@ export function AddressFormList() {
           <Skeleton className="h-32 w-full" />
         ) : addresses?.length ? (
           <div className="overflow-hidden rounded-2xl border border-(--bd) bg-(--s1)">
-            {addresses.map((address) => (
+            {addresses.map((address: Address) => (
               <div
                 key={address.id}
                 className="flex items-center justify-between gap-4 border-b border-(--bd) px-5 py-4 last:border-b-0"
@@ -200,7 +195,7 @@ export function AddressFormList() {
                       {address.number ? `, ${address.number}` : ""}
                     </p>
                     <p className="text-xs text-(--t4)">
-                      {ADDRESS_TYPE_LABEL[address.type]} — {address.city}, {address.state}
+                      {ADDRESS_TYPE_LABEL[address.type as AddressType]} — {address.city}, {address.state}
                     </p>
                   </div>
                 </div>
