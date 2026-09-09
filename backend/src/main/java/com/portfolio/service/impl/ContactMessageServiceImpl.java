@@ -1,15 +1,12 @@
 package com.portfolio.service.impl;
 
-import com.portfolio.backend.domain.ContactMessage;
-import com.portfolio.backend.domain.ContactMessageStatus;
-import com.portfolio.backend.dto.contact.ContactMessageRequestDTO;
-import com.portfolio.backend.dto.contact.ContactMessageResponseDTO;
-import com.portfolio.backend.exception.RateLimitExceededException;
-import com.portfolio.backend.exception.ResourceNotFoundException;
-import com.portfolio.backend.mapper.ContactMessageMapper;
-import com.portfolio.backend.ratelimit.ContactRateLimiter;
-import com.portfolio.backend.repository.ContactMessageRepository;
-import com.portfolio.backend.service.ContactMessageService;
+import com.portfolio.domain.ContactMessage;
+import com.portfolio.domain.enums.ContactMessageStatus;
+import com.portfolio.dto.contact.ContactMessageRequestDTO;
+import com.portfolio.dto.contact.ContactMessageResponseDTO;
+import com.portfolio.mapper.ContactMessageMapper;
+import com.portfolio.repository.ContactMessageRepository;
+import com.portfolio.service.ContactMessageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,8 +24,8 @@ public class ContactMessageServiceImpl implements ContactMessageService {
     private final ContactRateLimiter contactRateLimiter;
 
     public ContactMessageServiceImpl(ContactMessageRepository contactMessageRepository,
-                                      ContactMessageMapper contactMessageMapper,
-                                      ContactRateLimiter contactRateLimiter) {
+                                     ContactMessageMapper contactMessageMapper,
+                                     ContactRateLimiter contactRateLimiter) {
         this.contactMessageRepository = contactMessageRepository;
         this.contactMessageMapper = contactMessageMapper;
         this.contactRateLimiter = contactRateLimiter;
