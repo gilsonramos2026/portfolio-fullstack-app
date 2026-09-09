@@ -1,5 +1,6 @@
 package com.portfolio.domain;
 
+import com.portfolio.domain.enums.AddressType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
