@@ -1,8 +1,8 @@
-import { CertificationsSection } from "../../components/admin/about/CertificationsSection";
-import { EducationSection } from "../../components/admin/about/EducationSection";
-import { ProfileHeader } from "../../components/admin/about/ProfileHeader";
-import { SkillsSection } from "../../components/admin/about/SkillsSection";
-import { TechStackSection } from "../../components/admin/about/TechStackSection";
+import { CertificationsSection } from "../../components/public/about/CertificationsSection";
+import { EducationSection } from "../../components/public/about/EducationSection";
+import { ProfileHeader } from "../../components/public/about/ProfileHeader";
+import { SkillsSection } from "../../components/public/about/SkillsSection";
+import { TechStackSection } from "../../components/public/about/TechStackSection";
 import { Seo } from "../../components/ui/Seo";
 import { useCertifications } from "../../hooks/useCertifications";
 import { useEducations } from "../../hooks/useEducations";

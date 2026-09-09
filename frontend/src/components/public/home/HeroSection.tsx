@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import { ArrowRight, Download, Github, Linkedin, Instagram, Twitter, Mail, Code2 } from "lucide-react";
 import type { Profile } from "../../../types/profile";
 import type { GitHubStats } from "../../../hooks/useGitHubStats";
-import { fadeUp, staggerContainer } from "../../../lib/motionVariants";
+import { fadeRight, fadeUp, staggerContainer } from "../../../lib/motionVariants";
 import { Skeleton } from "../../ui/Skeleton";
 
 interface HeroSectionProps {
@@ -176,7 +177,7 @@ export function HeroSection({ profile, profileLoading, projectCount }: HeroSecti
                     boxShadow: "0 0 60px rgba(14,165,233,0.2), 0 25px 50px rgba(0,0,0,0.4)",
                   }}
                 >
-                  <Code2 size={72} className="text-(--color-brand-400) opacity-60" />
+                  <Code2 size={72} className="text-brand-400 opacity-60" />
                 </div>
               )}
 
@@ -185,7 +186,7 @@ export function HeroSection({ profile, profileLoading, projectCount }: HeroSecti
                   initial={{ opacity: 0, scale: 0.5, x: 20 }}
                   animate={{ opacity: 1, scale: 1, x: 0 }}
                   transition={{ delay: 0.8, type: "spring", stiffness: 200 }}
-                  className="absolute -bottom-4 -right-4 rounded-2xl bg-(--color-brand-500) px-3 py-2 text-center text-white shadow-lg"
+                  className="absolute -bottom-4 -right-4 rounded-2xl bg-brand-500 px-3 py-2 text-center text-white shadow-lg"
                   style={{ boxShadow: "0 8px 24px rgba(14,165,233,0.4)" }}
                 >
                   <p className="text-xl font-bold leading-none">{projectCount}+</p>

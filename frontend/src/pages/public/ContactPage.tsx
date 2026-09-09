@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { fadeUp } from "../../lib/motionVariants";
-import { ContactHeader } from "../../components/admin/contact/ContactHeader";
+import { ContactHeader } from "../../components/public/contact/ContactHeader";
 import { ContactForm } from "../../components/public/ContactForm";
 
 export function ContactPage() {
