@@ -1,0 +1,14 @@
+package com.portfolio.repository;
+
+import com.portfolio.domain.ContactMessage;
+import com.portfolio.domain.enums.ContactMessageStatus;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface ContactMessageRepository extends JpaRepository<ContactMessage, Long> {
+    List<ContactMessage> findAllByOrderByCreatedAtDesc();
+    long countByStatus(ContactMessageStatus status);
+}
