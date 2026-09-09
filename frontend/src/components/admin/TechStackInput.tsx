@@ -2,23 +2,23 @@ import { useState, type KeyboardEvent } from "react";
 import { Plus, X } from "lucide-react";
 import { Button } from "../ui/Button";
 
-interface TechStackInputProps {
-  value: string[];
+interface ProjectTechStackInputProps {
+  techStack: string[];
   onChange: (techs: string[]) => void;
 }
 
-export function TechStackInput({ value, onChange }: TechStackInputProps) {
+export function ProjectTechStackInput({ techStack, onChange }: ProjectTechStackInputProps) {
   const [newTech, setNewTech] = useState("");
 
   function addTech() {
     const tech = newTech.trim();
-    if (!tech || value.includes(tech)) return;
-    onChange([...value, tech]);
+    if (!tech || techStack.includes(tech)) return;
+    onChange([...techStack, tech]);
     setNewTech("");
   }
 
   function removeTech(techToRemove: string) {
-    onChange(value.filter((t) => t !== techToRemove));
+    onChange(techStack.filter((t) => t !== techToRemove));
   }
 
   function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
@@ -29,10 +29,10 @@ export function TechStackInput({ value, onChange }: TechStackInputProps) {
   }
 
   return (
-    <div>
+    <div className="mt-4">
       <span className="text-sm font-medium text-(--t2)">Tech stack do projeto</span>
       <div className="mt-2 flex flex-wrap gap-2">
-        {value.map((tech) => (
+        {techStack.map((tech) => (
           <span key={tech} className="chip font-mono">
             {tech}
             <button type="button" onClick={() => removeTech(tech)} aria-label={`Remover ${tech}`}>
