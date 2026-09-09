@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { uploadService } from "@/services/uploadService";
+import { uploadService } from "../services/uploadService";
 
 export function useImageUpload() {
   return useMutation({

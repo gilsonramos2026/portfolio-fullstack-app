@@ -1,6 +1,6 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { projectService, type ListProjectsParams } from "@/services/projectService";
-import { queryKeys } from "@/lib/queryClient";
+import { projectService, type ListProjectsParams } from "../services/projectService";
+import { queryKeys } from "../lib/queryClient";
 
 export function useProjects(params: ListProjectsParams = {}) {
   return useQuery({

@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { contactMessageService } from "@/services/contactMessageService";
-import type { ContactMessagePayload, ContactMessageStatus } from "@/types/contactMessage";
+import type { ContactMessagePayload, ContactMessageStatus } from "../types/contactMessage";
+import { contactMessageService } from "../services/contactMessageService";
 
 const KEY = ["contact-messages"] as const;
 const UNREAD_KEY = ["contact-messages", "unread-count"] as const;

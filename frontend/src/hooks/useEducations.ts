@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { educationService } from "@/services/educationService";
-import type { EducationPayload } from "@/types/education";
+import type { EducationPayload } from "../types/education";
+import { educationService } from "../services/educationService";
 
 const KEY = ["educations"] as const;
 

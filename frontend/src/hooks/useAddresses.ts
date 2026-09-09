@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { addressService } from "@/services/addressService";
-import { queryKeys } from "@/lib/queryClient";
-import type { AddressPayload } from "@/types/address";
+import { queryKeys } from "../lib/queryClient";
+import { addressService } from "../services/addressService";
+import type { AddressPayload } from "../types/address";
 
 export function useAddresses() {
   return useQuery({

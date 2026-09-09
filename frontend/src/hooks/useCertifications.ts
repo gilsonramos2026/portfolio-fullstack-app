@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { certificationService } from "@/services/certificationService";
-import type { CertificationPayload } from "@/types/certification";
+import type { CertificationPayload } from "../types/certification";
+import { certificationService } from "../services/certificationService";
 
 const KEY = ["certifications"] as const;
 
