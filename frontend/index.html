@@ -1,10 +1,65 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0ea5e9" />
+
+    <!-- Evita flash de tema errado: define [data-theme] antes do primeiro paint -->
+    <script>
+      (function () {
+        var saved = localStorage.getItem("theme");
+        var theme = saved === "dark" || saved === "light"
+          ? saved
+          : (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+
+    <!--
+      Meta tags estáticas: a maioria dos bots que gera preview de link
+      (LinkedIn, WhatsApp, Slack) não executa JavaScript, então o título
+      e a descrição "de verdade" para compartilhamento vêm daqui — o
+      react-helmet-async (via <Seo/>) só sobrescreve title/description
+      para quem navega com JS habilitado (usuário real, Googlebot).
+      Troque os valores abaixo pelos seus dados antes de publicar.
+    -->
+    <title>Seu Nome | Desenvolvedor(a) Full-Stack</title>
+    <meta
+      name="description"
+      content="Portfólio profissional — projetos, stack técnica e contato."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://seudominio.com/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Portfólio" />
+    <meta property="og:title" content="Seu Nome | Desenvolvedor(a) Full-Stack" />
+    <meta
+      property="og:description"
+      content="Portfólio profissional — projetos, stack técnica e contato."
+    />
+    <meta property="og:url" content="https://seudominio.com/" />
+    <meta property="og:image" content="https://seudominio.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="pt_BR" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Seu Nome | Desenvolvedor(a) Full-Stack" />
+    <meta
+      name="twitter:description"
+      content="Portfólio profissional — projetos, stack técnica e contato."
+    />
+    <meta name="twitter:image" content="https://seudominio.com/og-image.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="root"></div>
