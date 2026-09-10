@@ -10,7 +10,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: validate   # Flyway e a unica fonte de verdade do schema
+      ddl-auto: validate   # Flyway é a única fonte de verdade do schema
     open-in-view: false
     properties:
       hibernate:
@@ -37,22 +37,21 @@ server:
     include-binding-errors: always
 
 # ------------------------------------------------------------------
-# Upload de arquivos (foto de perfil, capa de projeto, curriculo).
-# Armazenamento em disco local, servido como recurso estatico em
-# /uploads/**.
+# Upload de arquivos (sincronizado perfeitamente com o LocalFileStorageService)
 # ------------------------------------------------------------------
 app:
   upload:
-    dir: ./uploads
-    public-base-url: http://localhost:8080/uploads
+    dir: ${APP_UPLOAD_DIR:./uploads}
+    public-url: ${APP_UPLOAD_PUBLIC_URL:http://localhost:8080/uploads}
     max-image-size-mb: 5
     max-document-size-mb: 10
 
 # ------------------------------------------------------------------
-# Seguranca administrativa (sem tabela de usuarios no banco).
+# Segurança administrativa (padrão portfolio.* definido no README)
 # ------------------------------------------------------------------
-admin:
-  token: ${ADMIN_TOKEN:changeme-super-secret-token}
+portfolio:
+  admin:
+    token: ${ADMIN_TOKEN:changeme-super-secret-token}
 
 springdoc:
   api-docs:
@@ -71,4 +70,4 @@ management:
 logging:
   level:
     root: INFO
-    com.portfolio.backend: DEBUG
+    com.portfolio: DEBUG
