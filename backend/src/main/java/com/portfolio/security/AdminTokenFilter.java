@@ -51,7 +51,7 @@ public class AdminTokenFilter extends HttpFilter {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Value("${admin.token}")
+    @Value("${portfolio.admin.token:${admin.token:meu-token-seguro-123}}")
     private String configuredAdminToken;
 
     @Override

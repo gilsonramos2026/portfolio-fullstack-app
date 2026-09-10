@@ -44,13 +44,14 @@ app:
   upload:
     dir: ${APP_UPLOAD_DIR:./uploads}
     public-url: ${APP_UPLOAD_PUBLIC_URL:http://localhost:8080/uploads}
+    public-base-url: ${APP_UPLOAD_PUBLIC_URL:http://localhost:8080/uploads}
     max-image-size-mb: 5
     max-document-size-mb: 10
 
-# Seguranca administrativa (Padrao portfolio.* do README)
+# Segurança administrativa (Padrão portfolio.* do README)
 portfolio:
   admin:
-    token: ${ADMIN_TOKEN:changeme-super-secret-token}
+    token: ${ADMIN_TOKEN:meu-token-seguro-123}
 
 springdoc:
   api-docs:
