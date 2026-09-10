@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { Github, ExternalLink } from "lucide-react";
 import { clsx } from "clsx";
-import type { Project } from "@/types/project";
-import { TechBadge } from "@/utils/techIcons";
-import { statusLabel, statusToneClasses } from "@/utils/formatters";
+import type { Project } from "../../types/project";
+import { statusLabel, statusToneClasses } from "../../utils/formatters";
+import { TechBadge } from "../../utils/techIcons";
+
 
 interface ProjectCardProps {
   project: Project;
@@ -34,7 +35,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       <div className="flex flex-1 flex-col gap-3 p-5">
         <div className="flex items-start justify-between gap-2">
           <Link to={`/projetos/${project.id}`}>
-            <h3 className="font-semibold text-(--t1) transition-colors group-hover:text-(--color-brand-400)">
+            <h3 className="font-semibold text-(--t1) transition-colors group-hover:text-brand-400">
               {project.title}
             </h3>
           </Link>
@@ -67,7 +68,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               href={project.demoUrl}
               target="_blank"
               rel="noreferrer noopener"
-              className="flex items-center gap-1.5 text-xs text-(--t4) transition-colors hover:text-(--color-brand-400)"
+              className="flex items-center gap-1.5 text-xs text-(--t4) transition-colors hover:text-brand-400"
             >
               <ExternalLink size={14} /> Demo
             </a>

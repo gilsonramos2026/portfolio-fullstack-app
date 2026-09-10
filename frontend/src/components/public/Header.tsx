@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Menu, X, Code2, Mail } from "lucide-react";
 import { clsx } from "clsx";
-import { useProfile } from "@/hooks/useProfile";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { useProfile } from "../../hooks/useProfile";
+import { ThemeToggle } from "../ui/ThemeToggle";
 
 const LINKS = [
   { to: "/", label: "Início", end: true },
@@ -32,7 +32,7 @@ export function Header() {
     >
       <nav className="content-container flex h-14 items-center justify-between gap-4 sm:h-16">
         <Link to="/" onClick={() => setOpen(false)} className="group flex shrink-0 items-center gap-2">
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-(--color-brand-500) transition-colors group-hover:bg-(--color-brand-400) sm:h-8 sm:w-8">
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand-500 transition-colors group-hover:bg-brand-400 sm:h-8 sm:w-8">
             <Code2 size={14} className="text-white" />
           </div>
           <span className="text-base font-semibold text-(--t1) sm:text-lg">

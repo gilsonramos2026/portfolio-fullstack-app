@@ -1,6 +1,6 @@
+import type { PageResponse } from "../types/api";
+import type { Project, ProjectImage, ProjectPayload } from "../types/project";
 import { apiClient } from "./apiClient";
-import type { PageResponse } from "@/types/api";
-import type { Project, ProjectImage, ProjectPayload } from "@/types/project";
 
 export interface ListProjectsParams {
   page?: number;

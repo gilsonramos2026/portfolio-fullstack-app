@@ -2,12 +2,8 @@ import { useRef, useState, type DragEvent } from "react";
 import toast from "react-hot-toast";
 import { GripVertical, ImageOff, Loader2, Upload, X } from "lucide-react";
 import { clsx } from "clsx";
-import {
-  useAddProjectImage,
-  useRemoveProjectImage,
-  useReorderProjectImages,
-} from "@/hooks/useProjectMutations";
-import type { ProjectImage } from "@/types/project";
+import type { ProjectImage } from "../../types/project";
+import { useAddProjectImage, useRemoveProjectImage, useReorderProjectImages } from "../../hooks/useProjectMutations";
 
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const MAX_SIZE_MB = 5;
@@ -115,14 +111,14 @@ export function ProjectImageManager({ projectId, images }: ProjectImageManagerPr
         className={clsx(
           "flex cursor-pointer select-none flex-col items-center gap-3 rounded-2xl border-2 border-dashed p-6 text-center transition-all",
           isUploading
-            ? "cursor-wait border-(--color-brand-500)/50 bg-(--color-brand-500)/5"
-            : "border-(--bd2) hover:border-(--color-brand-500)/60 hover:bg-(--cb)",
+            ? "cursor-wait border-brand-500/50 bg-brand-500/5"
+            : "border-(--bd2) hover:border-brand-500/60 hover:bg-(--cb)",
         )}
       >
         {isUploading ? (
           <>
-            <Loader2 size={22} className="animate-spin text-(--color-brand-400)" />
-            <p className="text-sm font-medium text-(--color-brand-400)">
+            <Loader2 size={22} className="animate-spin text-brand-400" />
+            <p className="text-sm font-medium text-brand-400">
               Enviando {uploadingNames.length} arquivo{uploadingNames.length > 1 ? "s" : ""}…
             </p>
           </>
@@ -171,7 +167,7 @@ export function ProjectImageManager({ projectId, images }: ProjectImageManagerPr
                 className={clsx(
                   "group relative aspect-video cursor-grab overflow-hidden rounded-xl border bg-(--cb) transition-all",
                   dropIndex === i && dragIndex !== i
-                    ? "scale-[1.03] border-(--color-brand-400) ring-2 ring-(--color-brand-400)/30"
+                    ? "scale-[1.03] border-brand-400 ring-2 ring-brand-400/30"
                     : dragIndex === i
                       ? "scale-95 border-(--bd2) opacity-50"
                       : "border-(--bd) hover:border-(--bd2)",
@@ -195,7 +191,7 @@ export function ProjectImageManager({ projectId, images }: ProjectImageManagerPr
                 <span
                   className={clsx(
                     "absolute bottom-1.5 left-1.5 rounded-md px-1.5 py-0.5 text-xs font-semibold",
-                    i === 0 ? "bg-(--color-brand-500) text-white" : "bg-black/60 text-white/70",
+                    i === 0 ? "bg-brand-500 text-white" : "bg-black/60 text-white/70",
                   )}
                 >
                   {i === 0 ? "★ Capa" : `${i + 1}`}
@@ -205,7 +201,7 @@ export function ProjectImageManager({ projectId, images }: ProjectImageManagerPr
           </div>
           <p className="flex items-start gap-2 text-xs text-(--t4)">
             <GripVertical size={13} className="mt-0.5 shrink-0" />
-            Arraste as imagens para reordenar. A marcada como <strong className="text-(--color-brand-400)">Capa</strong> é
+            Arraste as imagens para reordenar. A marcada como <strong className="text-brand-400">Capa</strong> é
             exibida como destaque na página do projeto.
           </p>
         </>

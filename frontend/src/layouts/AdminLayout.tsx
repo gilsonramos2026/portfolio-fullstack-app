@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Menu } from "lucide-react";
-import { Sidebar } from "@/components/admin/Sidebar";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { Sidebar } from "../components/admin/Sidebar";
+import { ThemeToggle } from "../components/ui/ThemeToggle";
 
 export function AdminLayout() {
   const [drawerOpen, setDrawerOpen] = useState(false);

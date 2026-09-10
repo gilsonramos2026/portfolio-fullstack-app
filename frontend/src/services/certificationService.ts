@@ -1,5 +1,5 @@
+import type { Certification, CertificationPayload } from "../types/certification";
 import { apiClient } from "./apiClient";
-import type { Certification, CertificationPayload } from "@/types/certification";
 
 export const certificationService = {
   async list(): Promise<Certification[]> {

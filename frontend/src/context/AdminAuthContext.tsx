@@ -1,5 +1,5 @@
 import { createContext, useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
-import { ADMIN_TOKEN_STORAGE_KEY, apiClient } from "@/services/apiClient";
+import { ADMIN_TOKEN_STORAGE_KEY, apiClient } from "../services/apiClient";
 
 interface AdminAuthContextValue {
   isAuthenticated: boolean;
@@ -9,6 +9,7 @@ interface AdminAuthContextValue {
   authError: string | null;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const AdminAuthContext = createContext<AdminAuthContextValue | undefined>(undefined);
 
 export function AdminAuthProvider({ children }: { children: ReactNode }) {

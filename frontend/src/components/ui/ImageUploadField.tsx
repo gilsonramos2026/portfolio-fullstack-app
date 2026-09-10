@@ -1,7 +1,7 @@
 import { useRef, useState, type ChangeEvent, type DragEvent } from "react";
 import { ImageIcon, Loader2, Upload, X } from "lucide-react";
 import { clsx } from "clsx";
-import { useImageUpload } from "@/hooks/useUpload";
+import { useImageUpload } from "../../hooks/useUpload";
 
 const ACCEPTED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const MAX_SIZE_MB = 5;
@@ -102,7 +102,7 @@ export function ImageUploadField({
           className={clsx(
             "relative flex shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-lg border bg-(--cb) transition-colors",
             aspect === "square" ? "h-24 w-24" : "h-24 w-40",
-            isDragging ? "border-(--color-brand-500)" : "border-(--bd) hover:border-(--t4)",
+            isDragging ? "border-brand-500" : "border-(--bd) hover:border-(--t4)",
           )}
         >
           {value && !isUploading ? (
@@ -132,7 +132,7 @@ export function ImageUploadField({
             type="button"
             onClick={() => inputRef.current?.click()}
             disabled={isUploading}
-            className="inline-flex items-center gap-2 rounded-lg border border-(--bd) px-3.5 py-2 text-sm font-medium text-(--t1) transition-colors hover:border-(--color-brand-500) disabled:opacity-50"
+            className="inline-flex items-center gap-2 rounded-lg border border-(--bd) px-3.5 py-2 text-sm font-medium text-(--t1) transition-colors hover:border-brand-500 disabled:opacity-50"
           >
             <Upload size={14} />
             {value ? "Trocar imagem" : "Enviar imagem"}

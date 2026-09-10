@@ -1,5 +1,5 @@
+import type { Skill, SkillPayload } from "../types/skill";
 import { apiClient } from "./apiClient";
-import type { Skill, SkillPayload } from "@/types/skill";
 
 export const skillService = {
   async list(): Promise<Skill[]> {

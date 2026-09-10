@@ -1,11 +1,12 @@
 import { useState, type FormEvent } from "react";
 import toast from "react-hot-toast";
 import { Pencil, Trash2 } from "lucide-react";
-import { useCreateSkill, useDeleteSkill, useSkills, useUpdateSkill } from "@/hooks/useSkills";
-import { Input } from "@/components/ui/Input";
-import { Button } from "@/components/ui/Button";
-import { Skeleton } from "@/components/ui/Skeleton";
-import type { Skill, SkillPayload } from "@/types/skill";
+import type { Skill, SkillPayload } from "../../types/skill";
+import { useCreateSkill, useDeleteSkill, useSkills, useUpdateSkill } from "../../hooks/useSkills";
+import { Input } from "../ui/Input";
+import { Button } from "../ui/Button";
+import { Skeleton } from "../ui/Skeleton";
+
 
 const EMPTY_FORM: SkillPayload = { name: "", category: "", proficiency: 70, displayOrder: 0 };
 
@@ -73,7 +74,7 @@ export function SkillManager() {
             step={5}
             value={form.proficiency}
             onChange={(e) => updateField("proficiency", Number(e.target.value))}
-            className="accent-(--color-brand-500)"
+            className="accent-brand-500"
           />
         </div>
         <Input

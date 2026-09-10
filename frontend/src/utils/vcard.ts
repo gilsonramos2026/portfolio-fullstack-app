@@ -1,4 +1,4 @@
-import type { Profile } from "@/types/profile";
+import type { Profile } from "../types/profile";
 
 /** Escapa caracteres reservados do formato vCard (RFC 6350). */
 function escapeVCardValue(value: string): string {

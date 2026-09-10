@@ -1,5 +1,5 @@
+import type { ContactMessage, ContactMessagePayload, ContactMessageStatus } from "../types/contactMessage";
 import { apiClient } from "./apiClient";
-import type { ContactMessage, ContactMessagePayload, ContactMessageStatus } from "@/types/contactMessage";
 
 export const contactMessageService = {
   /** Rota pública — usada pelo formulário de contato do site. */

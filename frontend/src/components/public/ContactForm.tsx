@@ -1,10 +1,11 @@
 import { useState, type FormEvent } from "react";
 import { CheckCircle2, Send } from "lucide-react";
-import { useSubmitContactMessage } from "@/hooks/useContactMessages";
-import { Input } from "@/components/ui/Input";
-import { Textarea } from "@/components/ui/Textarea";
-import { Button } from "@/components/ui/Button";
-import type { AppError } from "@/services/apiClient";
+import { useSubmitContactMessage } from "../../hooks/useContactMessages";
+import type { AppError } from "../../services/apiClient";
+import { Button } from "../ui/Button";
+import { Input } from "../ui/Input";
+import { Textarea } from "../ui/Textarea";
+
 
 interface FormState {
   name: string;
@@ -73,7 +74,7 @@ export function ContactForm() {
 
       {/* Honeypot anti-spam: invisível para humanos, bots de preenchimento
           automático costumam preencher qualquer campo que encontram. */}
-      <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+      <div aria-hidden="true" className="absolute left-[9999px] h-0 w-0 overflow-hidden">
         <label htmlFor="website">Deixe este campo em branco</label>
         <input
           id="website"

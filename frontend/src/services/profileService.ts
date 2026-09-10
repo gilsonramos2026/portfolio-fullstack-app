@@ -1,5 +1,5 @@
+import type { Profile, ProfilePayload } from "../types/profile";
 import { apiClient } from "./apiClient";
-import type { Profile, ProfilePayload } from "@/types/profile";
 
 export const profileService = {
   /** Rota pública — consumida pelo Header, Footer e Home. */

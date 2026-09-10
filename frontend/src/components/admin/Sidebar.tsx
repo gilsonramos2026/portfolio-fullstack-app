@@ -12,8 +12,8 @@ import {
   User,
   X,
 } from "lucide-react";
-import { useAdminAuth } from "@/hooks/useAdminAuth";
-import { useUnreadContactCount } from "@/hooks/useContactMessages";
+import { useAdminAuth } from "../../hooks/useAdminAuth";
+import { useUnreadContactCount } from "../../hooks/useContactMessages";
 
 const NAV = [
   { to: "/admin", label: "Dashboard", Icon: LayoutDashboard, end: true },
@@ -32,7 +32,7 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
     <>
       <div className="flex h-14 shrink-0 items-center justify-between border-b border-(--bd) px-4 sm:h-16">
         <div className="flex items-center gap-2">
-          <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-(--color-brand-500)">
+          <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-brand-500">
             <Code2 size={12} className="text-white" />
           </div>
           <span className="text-sm font-semibold text-(--t1)">Admin</span>
@@ -55,7 +55,7 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
               clsx(
                 "flex items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm font-medium transition-all",
                 isActive
-                  ? "border border-[rgba(14,165,233,0.3)] bg-[rgba(14,165,233,0.2)] text-(--color-brand-400)"
+                  ? "border border-[rgba(14,165,233,0.3)] bg-[rgba(14,165,233,0.2)] text-brand-400"
                   : "text-(--t3) hover:bg-(--cb) hover:text-(--t1)",
               )
             }
@@ -63,7 +63,7 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
             <Icon size={15} className="shrink-0" />
             <span className="flex-1">{label}</span>
             {label === "Mensagens" && !!unreadCount && (
-              <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-(--color-brand-500) px-1.5 text-xs font-semibold text-white">
+              <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-brand-500 px-1.5 text-xs font-semibold text-white">
                 {unreadCount}
               </span>
             )}
@@ -76,7 +76,7 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
           href="/"
           target="_blank"
           rel="noreferrer noopener"
-          className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs text-(--t4) transition-all hover:text-(--color-brand-400)"
+          className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs text-(--t4) transition-all hover:text-brand-400"
         >
           <ExternalLink size={13} />
           Ver site público

@@ -29,7 +29,9 @@ export function EducationSection({ educations, isLoading }: EducationSectionProp
       <div className="flex flex-col gap-8 border-l border-(--bd) pl-6">
         {educations.map((edu) => (
           <div key={edu.id} className="relative">
-            <div className="timeline-dot absolute left-[1.72rem] top-1" />
+            {/* Ponto reposicionado para alinhar perfeitamente ao lado do título/bloco */}
+            <div className="timeline-dot absolute left-[-1.85rem] top-1.5" />
+            
             <p className="text-xs font-mono text-(--t4)">
               {formatMonthYear(edu.startDate)} — {edu.endDate ? formatMonthYear(edu.endDate) : "atual"}
             </p>

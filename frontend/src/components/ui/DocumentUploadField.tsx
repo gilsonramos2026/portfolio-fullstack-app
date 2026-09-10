@@ -1,6 +1,7 @@
 import { useRef, useState, type ChangeEvent } from "react";
 import { FileText, Loader2, Upload, X } from "lucide-react";
-import { useDocumentUpload } from "@/hooks/useUpload";
+import { useDocumentUpload } from "../../hooks/useUpload";
+
 
 const MAX_SIZE_MB = 10;
 
@@ -69,7 +70,7 @@ export function DocumentUploadField({ label, value, onChange, hint, error }: Doc
               href={value}
               target="_blank"
               rel="noreferrer noopener"
-              className="block truncate text-sm text-(--color-brand-400) hover:underline"
+              className="block truncate text-sm text-brand-400 hover:underline"
             >
               {fileNameFromUrl}
             </a>
@@ -93,7 +94,7 @@ export function DocumentUploadField({ label, value, onChange, hint, error }: Doc
           type="button"
           onClick={() => inputRef.current?.click()}
           disabled={isUploading}
-          className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-(--bd) px-3 py-1.5 text-xs font-medium text-(--t1) transition-colors hover:border-(--color-brand-500) disabled:opacity-50"
+          className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-(--bd) px-3 py-1.5 text-xs font-medium text-(--t1) transition-colors hover:border-brand-500 disabled:opacity-50"
         >
           {isUploading ? <Loader2 size={13} className="animate-spin" /> : <Upload size={13} />}
           {value ? "Trocar" : "Enviar PDF"}

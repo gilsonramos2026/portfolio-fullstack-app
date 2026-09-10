@@ -1,5 +1,5 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { useAdminAuth } from "@/hooks/useAdminAuth";
+import { useAdminAuth } from "../../hooks/useAdminAuth";
 
 export function ProtectedRoute() {
   const { isAuthenticated } = useAdminAuth();

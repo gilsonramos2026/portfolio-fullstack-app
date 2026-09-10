@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import type { ApiErrorResponse } from "@/types/api";
+import type { ApiErrorResponse } from "../types/api";
 
 export const ADMIN_TOKEN_STORAGE_KEY = "portfolio.admin.token";
 

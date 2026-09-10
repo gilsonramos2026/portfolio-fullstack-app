@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Pencil, Star, Trash2 } from "lucide-react";
 import { clsx } from "clsx";
-import type { Project } from "@/types/project";
-import { statusLabel, statusToneClasses } from "@/utils/formatters";
-import { useDeleteProject } from "@/hooks/useProjectMutations";
+import { useDeleteProject } from "../../hooks/useProjectMutations";
+import type { Project } from "../../types/project";
+import { statusLabel, statusToneClasses } from "../../utils/formatters";
 
 export function ProjectTable({ projects }: { projects: Project[] }) {
   const deleteProject = useDeleteProject();

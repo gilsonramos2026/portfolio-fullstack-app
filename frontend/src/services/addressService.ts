@@ -1,5 +1,5 @@
+import type { Address, AddressPayload } from "../types/address";
 import { apiClient } from "./apiClient";
-import type { Address, AddressPayload } from "@/types/address";
 
 /** Endereços/contatos são um sub-recurso do perfil: /api/profile/addresses */
 export const addressService = {

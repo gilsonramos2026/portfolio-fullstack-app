@@ -1,4 +1,4 @@
-import { PROJECT_STATUS_LABEL, type ProjectStatus } from "@/types/project";
+import { PROJECT_STATUS_LABEL, type ProjectStatus } from "../types/project";
 
 export function formatDate(iso: string): string {
   return new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "short", year: "numeric" }).format(

@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
-import type { ProjectImage } from "@/types/project";
+import type { ProjectImage } from "../../types/project";
+
 
 interface ProjectGalleryProps {
   images: ProjectImage[];
@@ -55,7 +56,7 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
               onClick={() => setActiveIndex(i)}
               className={
                 "h-14 w-20 shrink-0 overflow-hidden rounded-lg border-2 transition-all " +
-                (i === activeIndex ? "border-(--color-brand-400) opacity-100" : "border-transparent opacity-40 hover:opacity-70")
+                (i === activeIndex ? "border-brand-400 opacity-100" : "border-transparent opacity-40 hover:opacity-70")
               }
             >
               <img src={img.url} alt="" className="h-full w-full object-cover" />
@@ -132,7 +133,7 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
                     onClick={() => setActiveIndex(i)}
                     className={
                       "h-9 w-14 shrink-0 overflow-hidden rounded-lg border-2 transition-all " +
-                      (i === activeIndex ? "border-(--color-brand-400) opacity-100" : "border-transparent opacity-40 hover:opacity-70")
+                      (i === activeIndex ? "border-brand-400 opacity-100" : "border-transparent opacity-40 hover:opacity-70")
                     }
                   >
                     <img src={img.url} alt="" className="h-full w-full object-cover" />

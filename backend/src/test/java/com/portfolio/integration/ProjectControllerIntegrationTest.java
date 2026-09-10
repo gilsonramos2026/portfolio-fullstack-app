@@ -1,8 +1,8 @@
 package com.portfolio.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.portfolio.backend.domain.ProjectStatus;
-import com.portfolio.backend.dto.project.ProjectRequestDTO;
+import com.portfolio.domain.enums.ProjectStatus;
+import com.portfolio.dto.project.ProjectRequestDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

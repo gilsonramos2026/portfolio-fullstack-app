@@ -1,18 +1,14 @@
 import { useState, type FormEvent } from "react";
 import toast from "react-hot-toast";
 import { Pencil, Trash2 } from "lucide-react";
-import {
-  useCertifications,
-  useCreateCertification,
-  useDeleteCertification,
-  useUpdateCertification,
-} from "@/hooks/useCertifications";
-import { Input } from "@/components/ui/Input";
-import { Button } from "@/components/ui/Button";
-import { Skeleton } from "@/components/ui/Skeleton";
-import { ImageUploadField } from "@/components/ui/ImageUploadField";
-import { formatMonthYear } from "@/utils/formatters";
-import type { Certification, CertificationPayload } from "@/types/certification";
+import type { Certification, CertificationPayload } from "../../types/certification";
+import { useCertifications, useCreateCertification, useDeleteCertification, useUpdateCertification } from "../../hooks/useCertifications";
+import { Input } from "../ui/Input";
+import { ImageUploadField } from "../ui/ImageUploadField";
+import { Button } from "../ui/Button";
+import { Skeleton } from "../ui/Skeleton";
+import { formatMonthYear } from "../../utils/formatters";
+
 
 const EMPTY_FORM: CertificationPayload = {
   name: "",

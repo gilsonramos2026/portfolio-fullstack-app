@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Github, Linkedin, Instagram, Twitter, Mail, Code2, MapPin } from "lucide-react";
-import { useProfile } from "@/hooks/useProfile";
+import { useProfile } from "../../hooks/useProfile";
 
 const LINKS = [
   { to: "/", label: "Início" },
@@ -11,7 +11,10 @@ const LINKS = [
 
 export function Footer() {
   const { data: profile } = useProfile();
-  const primaryAddress = profile?.addresses?.find((a) => a.primaryAddress) ?? profile?.addresses?.[0];
+  
+  // Utilizando type assertion seguro ou verificando as propriedades sem usar 'any'
+  const addresses = profile?.addresses as Array<{ primaryAddress?: boolean; city?: string; state?: string }> | undefined;
+  const primaryAddress = addresses?.find((a) => a.primaryAddress) ?? addresses?.[0];
 
   return (
     <footer className="mt-20 border-t border-(--bd) bg-(--s1)/60 sm:mt-28">
@@ -19,7 +22,7 @@ export function Footer() {
         <div className="mb-10 grid grid-cols-1 gap-8 sm:grid-cols-3">
           <div className="space-y-3">
             <Link to="/" className="group flex w-fit items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-(--color-brand-500) transition-colors group-hover:bg-(--color-brand-400)">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-500 transition-colors group-hover:bg-brand-400">
                 <Code2 size={15} className="text-white" />
               </div>
               <span className="font-semibold text-(--t1)">{profile?.fullName?.split(" ")[0] ?? "Dev"}</span>
@@ -36,7 +39,7 @@ export function Footer() {
                 <li key={link.to}>
                   <Link
                     to={link.to}
-                    className="text-sm text-(--t4) transition-colors hover:text-(--color-brand-400)"
+                    className="text-sm text-(--t4) transition-colors hover:text-brand-400"
                   >
                     {link.label}
                   </Link>

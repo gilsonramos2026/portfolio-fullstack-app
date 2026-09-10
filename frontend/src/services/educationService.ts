@@ -1,5 +1,5 @@
+import type { Education, EducationPayload } from "../types/education";
 import { apiClient } from "./apiClient";
-import type { Education, EducationPayload } from "@/types/education";
 
 export const educationService = {
   async list(): Promise<Education[]> {

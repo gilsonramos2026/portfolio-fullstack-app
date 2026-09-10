@@ -1,18 +1,14 @@
 import { useState, type FormEvent } from "react";
 import toast from "react-hot-toast";
 import { Pencil, Trash2 } from "lucide-react";
-import {
-  useCreateEducation,
-  useDeleteEducation,
-  useEducations,
-  useUpdateEducation,
-} from "@/hooks/useEducations";
-import { Input } from "@/components/ui/Input";
-import { Textarea } from "@/components/ui/Textarea";
-import { Button } from "@/components/ui/Button";
-import { Skeleton } from "@/components/ui/Skeleton";
-import { formatMonthYear } from "@/utils/formatters";
-import type { Education, EducationPayload } from "@/types/education";
+import type { Education, EducationPayload } from "../../types/education";
+import { useCreateEducation, useDeleteEducation, useEducations, useUpdateEducation } from "../../hooks/useEducations";
+import { Input } from "../ui/Input";
+import { Textarea } from "../ui/Textarea";
+import { Button } from "../ui/Button";
+import { Skeleton } from "../ui/Skeleton";
+import { formatMonthYear } from "../../utils/formatters";
+
 
 const EMPTY_FORM: EducationPayload = {
   institution: "",

@@ -1,23 +1,22 @@
 import { Route, Routes } from "react-router-dom";
-import { PublicLayout } from "@/layouts/PublicLayout";
-import { AdminLayout } from "@/layouts/AdminLayout";
-import { ProtectedRoute } from "@/components/admin/ProtectedRoute";
+import { PublicLayout } from "../layouts/PublicLayout";
+import { HomePage } from "../pages/public/HomePage";
+import { AboutPage } from "../pages/public/AboutPage";
+import { ProjectsPage } from "../pages/public/ProjectsPage";
+import { ProjectDetailPage } from "../pages/public/ProjectDetailPage";
+import { ContactPage } from "../pages/public/ContactPage";
+import { LoginPage } from "../pages/admin/LoginPage";
+import { ProtectedRoute } from "../components/admin/ProtectedRoute";
+import { AdminLayout } from "../layouts/AdminLayout";
+import { DashboardPage } from "../pages/admin/DashboardPage";
+import { ProfileSettingsPage } from "../pages/admin/ProfileSettingsPage";
+import { AddressesSettingsPage } from "../pages/admin/AddressesSettingsPage";
+import { CurriculumAdminPage } from "../pages/admin/CurriculumAdminPage";
+import { ContactMessagesAdminPage } from "../pages/admin/ContactMessagesAdminPage";
+import { ProjectsAdminPage } from "../pages/admin/ProjectsAdminPage";
+import { ProjectFormPage } from "../pages/admin/ProjectFormPage";
+import { NotFoundPage } from "../pages/public/NotFoundPage";
 
-import { HomePage } from "@/pages/public/HomePage";
-import { AboutPage } from "@/pages/public/AboutPage";
-import { ProjectsPage } from "@/pages/public/ProjectsPage";
-import { ProjectDetailPage } from "@/pages/public/ProjectDetailPage";
-import { ContactPage } from "@/pages/public/ContactPage";
-import { NotFoundPage } from "@/pages/public/NotFoundPage";
-
-import { LoginPage } from "@/pages/admin/LoginPage";
-import { DashboardPage } from "@/pages/admin/DashboardPage";
-import { ProfileSettingsPage } from "@/pages/admin/ProfileSettingsPage";
-import { AddressesSettingsPage } from "@/pages/admin/AddressesSettingsPage";
-import { CurriculumAdminPage } from "@/pages/admin/CurriculumAdminPage";
-import { ContactMessagesAdminPage } from "@/pages/admin/ContactMessagesAdminPage";
-import { ProjectsAdminPage } from "@/pages/admin/ProjectsAdminPage";
-import { ProjectFormPage } from "@/pages/admin/ProjectFormPage";
 
 /**
  * Configuração de rotas isolada do restante da aplicação.
