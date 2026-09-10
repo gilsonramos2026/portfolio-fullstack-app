@@ -48,7 +48,7 @@ app:
     max-image-size-mb: 5
     max-document-size-mb: 10
 
-# SeguranÁa administrativa (Padr„o portfolio.* do README)
+# Seguran√ßa administrativa (Padr√£o portfolio.* do README)
 portfolio:
   admin:
     token: ${ADMIN_TOKEN:meu-token-seguro-123}
