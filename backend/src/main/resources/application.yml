@@ -2,6 +2,9 @@ spring:
   application:
     name: portfolio-backend
 
+  main:
+    allow-bean-definition-overriding: true
+
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/portfolio_db}
     username: ${SPRING_DATASOURCE_USERNAME:postgres}
@@ -10,7 +13,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: validate   # Flyway é a única fonte de verdade do schema
+      ddl-auto: validate   # Flyway eh a unica fonte de verdade do schema
     open-in-view: false
     properties:
       hibernate:
@@ -36,9 +39,7 @@ server:
     include-message: always
     include-binding-errors: always
 
-# ------------------------------------------------------------------
-# Upload de arquivos (sincronizado perfeitamente com o LocalFileStorageService)
-# ------------------------------------------------------------------
+# Upload de arquivos (Sincronizado com o LocalFileStorageService)
 app:
   upload:
     dir: ${APP_UPLOAD_DIR:./uploads}
@@ -46,9 +47,7 @@ app:
     max-image-size-mb: 5
     max-document-size-mb: 10
 
-# ------------------------------------------------------------------
-# Segurança administrativa (padrão portfolio.* definido no README)
-# ------------------------------------------------------------------
+# Seguranca administrativa (Padrao portfolio.* do README)
 portfolio:
   admin:
     token: ${ADMIN_TOKEN:changeme-super-secret-token}
