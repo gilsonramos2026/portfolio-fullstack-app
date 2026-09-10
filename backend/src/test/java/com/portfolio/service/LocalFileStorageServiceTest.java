@@ -1,8 +1,8 @@
 package com.portfolio.service;
 
-import com.portfolio.backend.domain.UploadKind;
-import com.portfolio.backend.exception.FileStorageException;
-import com.portfolio.backend.service.impl.LocalFileStorageService;
+import com.portfolio.domain.enums.UploadKind;
+import com.portfolio.exception.FileStorageException;
+import com.portfolio.service.impl.LocalFileStorageService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

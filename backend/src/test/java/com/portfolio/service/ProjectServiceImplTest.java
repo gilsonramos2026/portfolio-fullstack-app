@@ -1,19 +1,18 @@
 package com.portfolio.service;
 
-import com.portfolio.backend.domain.Project;
-import com.portfolio.backend.domain.ProjectStatus;
-import com.portfolio.backend.dto.project.ProjectRequestDTO;
-import com.portfolio.backend.dto.project.ProjectResponseDTO;
-import com.portfolio.backend.exception.ResourceNotFoundException;
-import com.portfolio.backend.mapper.ProjectMapper;
-import com.portfolio.backend.repository.ProjectRepository;
-import com.portfolio.backend.service.impl.ProjectServiceImpl;
+import com.portfolio.domain.Project;
+import com.portfolio.domain.enums.ProjectStatus;
+import com.portfolio.dto.project.ProjectRequestDTO;
+import com.portfolio.dto.project.ProjectResponseDTO;
+import com.portfolio.exception.ResourceNotFoundException;
+import com.portfolio.mapper.ProjectMapper;
+import com.portfolio.repository.ProjectRepository;
+import com.portfolio.service.impl.ProjectServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -23,13 +22,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 /**
@@ -70,9 +69,9 @@ class ProjectServiceImplTest {
                 "API de Portfolio",
                 "API REST para gestão de portfolio",
                 "Descrição completa do projeto",
-                "https://github.com/exemplo/portfolio-backend",
-                "https://demo.exemplo.com",
-                "https://exemplo.com/imagem.png",
+                "https://github.com",
+                "https://exemplo.com",
+                "https://exemplo.com",
                 ProjectStatus.COMPLETED,
                 true,
                 1,
@@ -81,11 +80,23 @@ class ProjectServiceImplTest {
                 List.of("Java", "Spring Boot", "PostgreSQL"));
 
         responseDTO = new ProjectResponseDTO(
-                1L, "API de Portfolio", "API REST para gestão de portfolio", "Descrição completa do projeto",
-                "https://github.com/exemplo/portfolio-backend", "https://demo.exemplo.com",
-                "https://exemplo.com/imagem.png", ProjectStatus.COMPLETED, true, 1,
-                LocalDate.of(2024, 1, 1), LocalDate.of(2024, 3, 1),
-                List.of("Java", "Spring Boot", "PostgreSQL"), null, null);
+                1L,
+                "API de Portfolio",
+                "API REST para gestão de portfolio",
+                "Descrição completa do projeto",
+                "https://github.com",
+                "https://exemplo.com",
+                "https://exemplo.com",
+                ProjectStatus.COMPLETED,
+                true,
+                1,
+                LocalDate.of(2024, 1, 1),
+                LocalDate.of(2024, 3, 1),
+                List.of("Java", "Spring Boot", "PostgreSQL"),
+                null,
+                LocalDateTime.now(),
+                LocalDateTime.now()
+        );
     }
 
     @Nested
@@ -214,9 +225,11 @@ class ProjectServiceImplTest {
             when(projectRepository.findById(99L)).thenReturn(Optional.empty());
 
             assertThatThrownBy(() -> projectService.updateProject(99L, requestDTO))
-                    .isInstanceOf(ResourceNotFoundException.class);
+                    .isInstanceOf(ResourceNotFoundException.class)
+                    .hasMessageContaining("99");
 
-            verify(projectRepository, never()).save(any());
+            verify(projectRepository, never()).save(any(Project.class));
+            verify(projectMapper, never()).updateEntityFromDto(any(), any());
         }
     }
 
@@ -225,26 +238,27 @@ class ProjectServiceImplTest {
     class DeleteProject {
 
         @Test
-        @DisplayName("deve remover um projeto existente")
-        void shouldDeleteExistingProject() {
+        @DisplayName("deve remover o projeto com sucesso quando o ID existir")
+        void shouldDeleteProjectSuccessfully() {
             when(projectRepository.findById(1L)).thenReturn(Optional.of(project));
-            ArgumentCaptor<Project> captor = ArgumentCaptor.forClass(Project.class);
+            doNothing().when(projectRepository).delete(project);
 
             projectService.deleteProject(1L);
 
-            verify(projectRepository).delete(captor.capture());
-            assertThat(captor.getValue().getId()).isEqualTo(1L);
+            verify(projectRepository).findById(1L);
+            verify(projectRepository).delete(project);
         }
 
         @Test
-        @DisplayName("deve lançar ResourceNotFoundException ao remover projeto inexistente")
+        @DisplayName("deve lançar ResourceNotFoundException ao tentar deletar projeto inexistente")
         void shouldThrowExceptionWhenDeletingNonExistentProject() {
             when(projectRepository.findById(99L)).thenReturn(Optional.empty());
 
             assertThatThrownBy(() -> projectService.deleteProject(99L))
-                    .isInstanceOf(ResourceNotFoundException.class);
+                    .isInstanceOf(ResourceNotFoundException.class)
+                    .hasMessageContaining("99");
 
-            verify(projectRepository, never()).delete(any());
+            verify(projectRepository, never()).delete(any(Project.class));
         }
     }
 }

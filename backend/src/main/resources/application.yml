@@ -3,14 +3,14 @@ spring:
     name: portfolio-backend
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/portfolio_db
-    username: postgres
-    password: postgres
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/portfolio_db}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
-      ddl-auto: validate   # Flyway é a única fonte de verdade do schema
+      ddl-auto: validate   # Flyway e a unica fonte de verdade do schema
     open-in-view: false
     properties:
       hibernate:
@@ -37,8 +37,8 @@ server:
     include-binding-errors: always
 
 # ------------------------------------------------------------------
-# Upload de arquivos (foto de perfil, capa de projeto, currículo).
-# Armazenamento em disco local, servido como recurso estático em
+# Upload de arquivos (foto de perfil, capa de projeto, curriculo).
+# Armazenamento em disco local, servido como recurso estatico em
 # /uploads/**.
 # ------------------------------------------------------------------
 app:
@@ -49,10 +49,10 @@ app:
     max-document-size-mb: 10
 
 # ------------------------------------------------------------------
-# Segurança administrativa (sem tabela de usuários no banco).
+# Seguranca administrativa (sem tabela de usuarios no banco).
 # ------------------------------------------------------------------
 admin:
-  token: changeme-super-secret-token
+  token: ${ADMIN_TOKEN:changeme-super-secret-token}
 
 springdoc:
   api-docs:
