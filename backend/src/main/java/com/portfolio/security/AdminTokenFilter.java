@@ -42,6 +42,12 @@ public class AdminTokenFilter extends HttpFilter {
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
+        // Libera imediatamente requisições OPTIONS (Preflight do CORS) para evitar bloqueios do navegador
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            chain.doFilter(request, response);
+            return;
+        }
+
         String method = request.getMethod();
         String path = request.getRequestURI();
 
