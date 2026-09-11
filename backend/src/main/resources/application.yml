@@ -6,7 +6,6 @@ spring:
     allow-bean-definition-overriding: true
 
   datasource:
-    datasource:
     url: jdbc:${DATABASE_PRIVATE_URL}
     driver-class-name: org.postgresql.Driver
 
