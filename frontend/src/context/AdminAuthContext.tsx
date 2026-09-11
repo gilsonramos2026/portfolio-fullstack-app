@@ -29,7 +29,7 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     sessionStorage.setItem(ADMIN_TOKEN_STORAGE_KEY, token);
     try {
       // CORREÇÃO: Adicionado o prefixo /api explicitamente antes da rota admin
-      await apiClient.post("/api/admin/session/validate");
+      await apiClient.post("/admin/session/validate");
       setIsAuthenticated(true);
     } catch {
       sessionStorage.removeItem(ADMIN_TOKEN_STORAGE_KEY);
