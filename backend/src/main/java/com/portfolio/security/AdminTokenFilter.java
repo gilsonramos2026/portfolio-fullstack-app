@@ -6,7 +6,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -29,9 +28,6 @@ public class AdminTokenFilter extends HttpFilter {
     private static final String ADMIN_SESSION_VALIDATE_PATH = "/api/admin/session/validate";
 
     private final ObjectMapper objectMapper = new ObjectMapper();
-
-    @Value("${ADMIN_TOKEN:meu-token-seguro-123}")
-    private String configuredAdminToken;
 
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -77,8 +73,16 @@ public class AdminTokenFilter extends HttpFilter {
     }
 
     private boolean isValidToken(String providedToken) {
+        // Busca a variável de ambiente direto do Sistema Operacional (Railway)
+        String envToken = System.getenv("ADMIN_TOKEN");
+
+        // Se a variável não estiver configurada no Railway por algum motivo, usa o padrão seguro
+        if (envToken == null || envToken.trim().isEmpty()) {
+            envToken = "meu-token-seguro-123";
+        }
+
         byte[] provided = providedToken.getBytes(StandardCharsets.UTF_8);
-        byte[] expected = configuredAdminToken.getBytes(StandardCharsets.UTF_8);
+        byte[] expected = envToken.getBytes(StandardCharsets.UTF_8);
         return MessageDigest.isEqual(provided, expected);
     }
 
