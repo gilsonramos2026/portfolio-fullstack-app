@@ -30,18 +30,16 @@ public class AdminTokenFilter extends HttpFilter {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    // Corrigido para buscar exatamente a chave do seu application.yml
-    @Value("${portfolio.admin.token:${ADMIN_TOKEN:meu-token-seguro-123}}}")
+    // SINTAXE CORRIGIDA: Removida a chave sobressalente no final
+    @Value("${portfolio.admin.token:${ADMIN_TOKEN:meu-token-seguro-123}}")
     private String configuredAdminToken;
 
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
-        // Força a injeção manual dos headers de CORS ANTES de qualquer validação.
-        // Isso garante que mesmo se a requisição falhar/der erro 401, o navegador não bloqueie por CORS.
         String origin = request.getHeader("Origin");
-        if (origin != null && (origin.equals("http://localhost:5173") || origin.equals("https://vercel.app"))) {
+        if (origin != null && (origin.equals("http://localhost:5173") || origin.equals("https://portfolio-fullstack-app.vercel.app"))) {
             response.setHeader("Access-Control-Allow-Origin", origin);
             response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
             response.setHeader("Access-Control-Allow-Headers", "X-Admin-Token, Content-Type, Authorization, Accept, Origin");
@@ -49,7 +47,7 @@ public class AdminTokenFilter extends HttpFilter {
             response.setHeader("Access-Control-Max-Age", "3600");
         }
 
-        // Se for requisição de preflight do navegador, responde 200 imediatamente com os headers acima
+        // Se for requisição OPTIONS (Preflight), encerra com 200 OK imediatamente
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
             return;
@@ -57,6 +55,12 @@ public class AdminTokenFilter extends HttpFilter {
 
         String method = request.getMethod();
         String path = request.getRequestURI();
+
+        // Se a rota não começar com /api, deixa passar direto (ex: documentação swagger, uploads, etc)
+        if (!path.startsWith("/api")) {
+            chain.doFilter(request, response);
+            return;
+        }
 
         boolean isContactSubmission = "POST".equals(method) && CONTACT_MESSAGES_PATH.equals(path);
         boolean isContactInboxRead = "GET".equals(method) && path.startsWith(CONTACT_MESSAGES_PATH);
