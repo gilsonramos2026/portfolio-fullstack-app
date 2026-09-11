@@ -20,12 +20,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                // Declaramos as URLs exatas explicitamente. Isso é 100% compatível com allowCredentials(true)
-                // e impede qualquer crash de inicialização (initializeBean) no boot.
-                .allowedOrigins(
+                // Utiliza allowedOriginPatterns com coringa para aceitar localhost e qualquer domínio/preview da Vercel
+                .allowedOriginPatterns(
                         "http://localhost:5173",
-                        "https://portfolio-fullstack-app.vercel.app",        // Origem antiga acusada no seu erro
-                        "https://aplicativo-fullstack-portfolio.vercel.app"  // Seu domínio novo da Vercel
+                        "http://localhost:3000",
+                        "https://*.vercel.app"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
                 .allowedHeaders("X-Admin-Token", "Content-Type", "Authorization", "Accept", "Origin")
