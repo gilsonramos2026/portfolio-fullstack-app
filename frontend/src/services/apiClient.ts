@@ -3,12 +3,12 @@ import type { ApiErrorResponse } from "../types/api";
 
 export const ADMIN_TOKEN_STORAGE_KEY = "portfolio.admin.token";
 
-// Conexão DIRETA para a sua URL real do Railway, matando a dependência do proxy travado da Vercel
+// ALTERADO: Agora aponta para o contêiner correto com o ID -8016 e sufixo /api
 const baseURL = "https://railway.app";
 
 export const apiClient = axios.create({
   baseURL,
-  timeout: 30000, // Aumentado para 30 segundos caso o Railway demore para acordar o banco no primeiro clique
+  timeout: 30000, // Mantido 30 segundos para evitar timeout com o banco do Railway
   headers: {
     "Content-Type": "application/json",
   },
