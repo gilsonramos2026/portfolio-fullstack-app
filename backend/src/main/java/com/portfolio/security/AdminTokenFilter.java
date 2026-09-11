@@ -30,7 +30,6 @@ public class AdminTokenFilter extends HttpFilter {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    // SINTAXE CORRIGIDA: Removida a chave sobressalente no final
     @Value("${portfolio.admin.token:${ADMIN_TOKEN:meu-token-seguro-123}}")
     private String configuredAdminToken;
 
@@ -38,25 +37,15 @@ public class AdminTokenFilter extends HttpFilter {
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
-        String origin = request.getHeader("Origin");
-        if (origin != null && (origin.equals("http://localhost:5173") || origin.equals("https://portfolio-fullstack-app.vercel.app"))) {
-            response.setHeader("Access-Control-Allow-Origin", origin);
-            response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
-            response.setHeader("Access-Control-Allow-Headers", "X-Admin-Token, Content-Type, Authorization, Accept, Origin");
-            response.setHeader("Access-Control-Allow-Credentials", "true");
-            response.setHeader("Access-Control-Max-Age", "3600");
-        }
-
-        // Se for requisição OPTIONS (Preflight), encerra com 200 OK imediatamente
+        // Se for OPTIONS, apenas passa adiante sem barrar
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
-            response.setStatus(HttpServletResponse.SC_OK);
+            chain.doFilter(request, response);
             return;
         }
 
         String method = request.getMethod();
         String path = request.getRequestURI();
 
-        // Se a rota não começar com /api, deixa passar direto (ex: documentação swagger, uploads, etc)
         if (!path.startsWith("/api")) {
             chain.doFilter(request, response);
             return;
