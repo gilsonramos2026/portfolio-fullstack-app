@@ -6,7 +6,7 @@ spring:
     allow-bean-definition-overriding: true
 
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/portfolio_db}
+    url: ${URL_DO_BANCO_DE_DADOS:jdbc:postgresql://localhost:5432/portfolio_db}
     driver-class-name: org.postgresql.Driver
 
   jpa:
