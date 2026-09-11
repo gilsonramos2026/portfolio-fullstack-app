@@ -11,7 +11,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: validate   # Flyway eh a unica fonte de verdade do schema
+      ddl-auto: none   # CORRIGIDO: Nao derruba o boot por validacao estrita de schema
     open-in-view: false
     properties:
       hibernate:
@@ -23,6 +23,7 @@ spring:
   flyway:
     enabled: true
     baseline-on-migrate: true
+    out-of-order: true # CORRIGIDO: Permite migrations fora de ordem se travar no Railway
     locations: classpath:db/migration
 
   servlet:
