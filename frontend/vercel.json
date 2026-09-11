@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://portfolio-fullstack-app-production-8016.up.railway.app/api/:path*"
+      "destination": "https://portfolio-fullstack-app-production.up.railway.app/api/:path*"
     },
     {
       "source": "/((?!api/).*)",
