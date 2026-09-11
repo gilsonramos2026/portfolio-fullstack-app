@@ -3,13 +3,12 @@ import type { ApiErrorResponse } from "../types/api";
 
 export const ADMIN_TOKEN_STORAGE_KEY = "portfolio.admin.token";
 
-// const baseURL = import.meta.env.VITE_API_URL ?? "http://localhost:8080/api";
-// Adicione esta:
-const baseURL = "/api";
+// Conexão DIRETA para a sua URL real do Railway, matando a dependência do proxy travado da Vercel
+const baseURL = "https://railway.app";
 
 export const apiClient = axios.create({
   baseURL,
-  timeout: 15000,
+  timeout: 30000, // Aumentado para 30 segundos caso o Railway demore para acordar o banco no primeiro clique
   headers: {
     "Content-Type": "application/json",
   },
@@ -18,8 +17,6 @@ export const apiClient = axios.create({
 /**
  * Interceptor de request: injeta o token administrativo (X-Admin-Token)
  * em toda chamada, sempre que existir uma sessão salva no navegador.
- * As rotas GET no backend ignoram o header; nas rotas de mutação ele é
- * obrigatório e validado pelo AdminTokenFilter.
  */
 apiClient.interceptors.request.use((config) => {
   const token = sessionStorage.getItem(ADMIN_TOKEN_STORAGE_KEY);
@@ -44,8 +41,7 @@ export class AppError extends Error {
 
 /**
  * Interceptor de response: converte erros do Axios/backend em AppError,
- * e dispara um evento global quando o token admin é rejeitado (401),
- * para que a UI redirecione ao login sem acoplar cada hook a isso.
+ * e dispara um evento global quando o token admin é rejeitado (401).
  */
 apiClient.interceptors.response.use(
   (response) => response,
@@ -63,8 +59,6 @@ apiClient.interceptors.response.use(
         ? "Tempo de resposta excedido. Verifique se a API está no ar."
         : "Não foi possível completar a requisição.");
 
-    // O backend manda "campo: mensagem" por item; convertemos para um mapa
-    // {campo: mensagem} para os formulários destacarem o input certo.
     const validationErrors: Record<string, string> = {};
     for (const detail of data?.details ?? []) {
       const [field, ...rest] = detail.split(":");
