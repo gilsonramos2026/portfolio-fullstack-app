@@ -3,10 +3,8 @@ import type { ApiErrorResponse } from "../types/api";
 
 export const ADMIN_TOKEN_STORAGE_KEY = "portfolio.admin.token";
 
-// CORRIGIDO: Anexa '/api' corretamente à URL do Railway
-const baseURL = import.meta.env.VITE_API_URL
-  ? `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api`
-  : "/api";
+// CORRIGIDO: Usa a URL da variável de ambiente diretamente ou cai para o proxy local '/api'
+const baseURL = import.meta.env.VITE_API_URL || "/api";
 
 export const apiClient = axios.create({
   baseURL,
