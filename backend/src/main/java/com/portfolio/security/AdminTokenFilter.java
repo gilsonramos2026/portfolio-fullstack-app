@@ -38,7 +38,7 @@ public class AdminTokenFilter extends HttpFilter {
             throws IOException, ServletException {
 
         String origin = request.getHeader("Origin");
-        if (origin != null && (origin.equals("http://localhost:5173") || origin.equals("https://vercel.app"))) {
+        if (origin != null && (origin.equals("http://localhost:5173") || origin.equals("https://portfolio-fullstack-app.vercel.app"))) {
             response.setHeader("Access-Control-Allow-Origin", origin);
             response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
             response.setHeader("Access-Control-Allow-Headers", "X-Admin-Token, Content-Type, Authorization, Accept, Origin");
