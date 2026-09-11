@@ -28,9 +28,8 @@ export function AdminAuthProvider({ children }: { children: ReactNode }) {
     // Salva otimisticamente para o interceptor injetar o header na chamada de validação.
     sessionStorage.setItem(ADMIN_TOKEN_STORAGE_KEY, token);
     try {
-      // POST sem efeito colateral: o AdminTokenFilter já rejeita com 401
-      // antes de chegar no controller caso o token seja inválido.
-      await apiClient.post("/admin/session/validate");
+      // CORREÇÃO: Adicionado o prefixo /api explicitamente antes da rota admin
+      await apiClient.post("/api/admin/session/validate");
       setIsAuthenticated(true);
     } catch {
       sessionStorage.removeItem(ADMIN_TOKEN_STORAGE_KEY);
