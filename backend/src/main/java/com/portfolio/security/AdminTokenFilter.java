@@ -30,16 +30,28 @@ public class AdminTokenFilter extends HttpFilter {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Value("${admin.token:${PORTFOLIO_ADMIN_TOKEN:${ADMIN_TOKEN:meu-token-seguro-123}}}")
+    // Corrigido para buscar exatamente a chave do seu application.yml
+    @Value("${portfolio.admin.token:${ADMIN_TOKEN:meu-token-seguro-123}}}")
     private String configuredAdminToken;
 
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
-        // Ignora requisições de preflight OPTIONS. O Spring vai interceptar e responder o CORS global.
+        // Força a injeção manual dos headers de CORS ANTES de qualquer validação.
+        // Isso garante que mesmo se a requisição falhar/der erro 401, o navegador não bloqueie por CORS.
+        String origin = request.getHeader("Origin");
+        if (origin != null && (origin.equals("http://localhost:5173") || origin.equals("https://vercel.app"))) {
+            response.setHeader("Access-Control-Allow-Origin", origin);
+            response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
+            response.setHeader("Access-Control-Allow-Headers", "X-Admin-Token, Content-Type, Authorization, Accept, Origin");
+            response.setHeader("Access-Control-Allow-Credentials", "true");
+            response.setHeader("Access-Control-Max-Age", "3600");
+        }
+
+        // Se for requisição de preflight do navegador, responde 200 imediatamente com os headers acima
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
-            chain.doFilter(request, response);
+            response.setStatus(HttpServletResponse.SC_OK);
             return;
         }
 
@@ -86,7 +98,7 @@ public class AdminTokenFilter extends HttpFilter {
         body.put("timestamp", LocalDateTime.now().toString());
         body.put("status", HttpStatus.UNAUTHORIZED.value());
         body.put("error", "Unauthorized");
-        body.put("message", "Token administrativo ausente ou inválido. Envie o header X-Admin-Token.");
+        body.put("message", "Token administrativo ausente ou inválido. Envie o header X-Admin-Token correto.");
         body.put("path", request.getRequestURI());
 
         response.getWriter().write(objectMapper.writeValueAsString(body));
