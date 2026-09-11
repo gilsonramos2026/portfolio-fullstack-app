@@ -111,10 +111,18 @@ public class Profile {
     }
 
     /**
-     * 🚀 Método Getter explícito adicionado para resolver o problema de compilação
-     * e o aviso de resolução visual da sua IDE.
+     * 🚀 Métodos explícitos adicionados para contornar falhas de resolução
+     * do plugin Lombok na sua IDE local.
      */
     public Long getId() {
         return this.id;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
