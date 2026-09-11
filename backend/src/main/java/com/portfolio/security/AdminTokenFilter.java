@@ -23,24 +23,8 @@ import java.util.Set;
 /**
  * Filtro responsável por proteger as rotas administrativas de mutação
  * (POST, PUT, PATCH, DELETE) da API, validando o header {@code X-Admin-Token}
- * contra o valor configurado em {@code admin.token} (application.yml).
- *
- * <p>Não há tabela de usuários no banco de dados: trata-se de uma
- * autenticação simples baseada em token estático de posse exclusiva do Admin,
- * adequada ao escopo de um portfolio pessoal single-tenant.</p>
- *
- * <p>Regra geral: GET é público, POST/PUT/PATCH/DELETE exigem o token.</p>
- *
- * <p><b>Exceção deliberada — mensagens de contato</b>: {@code /api/contact-messages}
- * inverte a regra geral, porque é o único recurso onde o público
- * <i>escreve</i> (visitante enviando uma mensagem) e o Admin <i>lê</i>
- * (caixa de entrada no painel). Por isso:</p>
- * <ul>
- *   <li>{@code POST /api/contact-messages} é público (sem token) — é como o
- *       formulário de contato do site envia a mensagem.</li>
- *   <li>{@code GET /api/contact-messages} exige token — as mensagens
- *       recebidas são privadas, só o Admin deve lê-las.</li>
- * </ul>
+ * contra o valor configurado em {@code admin.token} (application.yml)
+ * ou na variável de ambiente {@code ADMIN_TOKEN}.
  */
 @Component
 public class AdminTokenFilter extends HttpFilter {
@@ -51,7 +35,7 @@ public class AdminTokenFilter extends HttpFilter {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Value("${portfolio.admin.token:${admin.token:meu-token-seguro-123}}")
+    @Value("${admin.token:${PORTFOLIO_ADMIN_TOKEN:${ADMIN_TOKEN:meu-token-seguro-123}}}")
     private String configuredAdminToken;
 
     @Override
