@@ -20,9 +20,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins(
+                // Alterado de allowedOrigins para allowedOriginPatterns para aceitar o caractere curinga (*)
+                .allowedOriginPatterns(
                         "http://localhost:5173",
-                        "https://vercel.app" // URL exata do seu site
+                        "https://*.vercel.app" // Liberado qualquer subdomínio da Vercel (de produção ou preview)
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
                 .allowedHeaders("X-Admin-Token", "Content-Type", "Authorization", "Accept", "Origin")
