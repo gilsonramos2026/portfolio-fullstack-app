@@ -31,7 +31,9 @@ public class ProfileServiceImpl implements ProfileService {
         this.profileMapper = profileMapper;
     }
 
+    // 🚀 ATUALIZADO: Sobrescreve o readOnly global para permitir persistir o perfil se o banco estiver vazio
     @Override
+    @Transactional
     public ProfileResponseDTO getProfile() {
         Profile profile = findSingletonProfileOrCreateEmpty();
         return profileMapper.toResponseDTO(profile);

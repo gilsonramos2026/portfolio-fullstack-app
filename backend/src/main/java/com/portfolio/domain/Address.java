@@ -73,4 +73,12 @@ public class Address {
     @LastModifiedDate
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
+
+    /**
+     * 🚀 Método Setter explícito adicionado para eliminar o aviso da IDE
+     * e permitir a vinculação correta dentro da classe Profile.
+     */
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
 }

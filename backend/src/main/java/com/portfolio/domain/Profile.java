@@ -109,4 +109,12 @@ public class Profile {
         addresses.remove(address);
         address.setProfile(null);
     }
+
+    /**
+     * 🚀 Método Getter explícito adicionado para resolver o problema de compilação
+     * e o aviso de resolução visual da sua IDE.
+     */
+    public Long getId() {
+        return this.id;
+    }
 }
