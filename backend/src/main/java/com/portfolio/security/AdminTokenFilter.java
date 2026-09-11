@@ -20,18 +20,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Filtro responsável por proteger as rotas administrativas de mutação
- * (POST, PUT, PATCH, DELETE) da API, validando o header {@code X-Admin-Token}
- * contra o valor configurado em {@code admin.token} (application.yml)
- * ou na variável de ambiente {@code ADMIN_TOKEN}.
- */
 @Component
 public class AdminTokenFilter extends HttpFilter {
 
     private static final String ADMIN_TOKEN_HEADER = "X-Admin-Token";
     private static final Set<String> PROTECTED_METHODS = Set.of("POST", "PUT", "PATCH", "DELETE");
     private static final String CONTACT_MESSAGES_PATH = "/api/contact-messages";
+    private static final String ADMIN_SESSION_VALIDATE_PATH = "/api/admin/session/validate";
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -42,9 +37,19 @@ public class AdminTokenFilter extends HttpFilter {
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
-        // Libera imediatamente requisições OPTIONS (Preflight do CORS) para evitar bloqueios do navegador
+        // Injeta os headers de CORS em qualquer requisição vindas da Vercel ou localhost
+        String origin = request.getHeader("Origin");
+        if (origin != null && (origin.equals("http://localhost:5173") || origin.equals("https://portfolio-fullstack-app.vercel.app"))) {
+            response.setHeader("Access-Control-Allow-Origin", origin);
+            response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
+            response.setHeader("Access-Control-Allow-Headers", "*, X-Admin-Token, Content-Type");
+            response.setHeader("Access-Control-Allow-Credentials", "true");
+            response.setHeader("Access-Control-Max-Age", "3600");
+        }
+
+        // Se for o preflight OPTIONS, encerra com 200 OK imediatamente com os headers injetados acima
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
-            chain.doFilter(request, response);
+            response.setStatus(HttpServletResponse.SC_OK);
             return;
         }
 
@@ -53,16 +58,14 @@ public class AdminTokenFilter extends HttpFilter {
 
         boolean isContactSubmission = "POST".equals(method) && CONTACT_MESSAGES_PATH.equals(path);
         boolean isContactInboxRead = "GET".equals(method) && path.startsWith(CONTACT_MESSAGES_PATH);
+        boolean isAdminSessionValidate = path.equals(ADMIN_SESSION_VALIDATE_PATH);
 
-        // Exceção: envio de mensagem de contato é a única escrita pública da API.
         if (isContactSubmission) {
             chain.doFilter(request, response);
             return;
         }
 
-        // Exceção: leitura da caixa de mensagens é a única leitura administrativa.
-        // Demais métodos não mutantes (GET/HEAD/OPTIONS) seguem livres.
-        boolean requiresToken = isContactInboxRead || PROTECTED_METHODS.contains(method);
+        boolean requiresToken = isAdminSessionValidate || isContactInboxRead || PROTECTED_METHODS.contains(method);
         if (!requiresToken) {
             chain.doFilter(request, response);
             return;
@@ -78,7 +81,6 @@ public class AdminTokenFilter extends HttpFilter {
         chain.doFilter(request, response);
     }
 
-    /** Comparação em tempo constante — evita vazar o token por diferença de latência. */
     private boolean isValidToken(String providedToken) {
         byte[] provided = providedToken.getBytes(StandardCharsets.UTF_8);
         byte[] expected = configuredAdminToken.getBytes(StandardCharsets.UTF_8);
