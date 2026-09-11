@@ -6,7 +6,7 @@ spring:
     allow-bean-definition-overriding: true
 
   datasource:
-    url: jdbc:${URL_DO_BANCO_DE_DADOS}
+    url:  ${URL_DO_BANCO_DE_DADOS}
     driver-class-name: org.postgresql.Driver
 
   jpa:

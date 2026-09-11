@@ -2,7 +2,11 @@ package com.portfolio.domain;
 
 import com.portfolio.domain.enums.AddressType;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -12,7 +16,6 @@ import java.time.LocalDateTime;
 /**
  * Endereço ou canal de contato vinculado ao {@link Profile}.
  */
-
 @Entity
 @Table(name = "address")
 @EntityListeners(AuditingEntityListener.class)

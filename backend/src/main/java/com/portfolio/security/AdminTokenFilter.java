@@ -19,7 +19,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-@Component
 public class AdminTokenFilter extends HttpFilter {
 
     private static final String ADMIN_TOKEN_HEADER = "X-Admin-Token";

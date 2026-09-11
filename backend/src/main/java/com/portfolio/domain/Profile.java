@@ -1,7 +1,11 @@
 package com.portfolio.domain;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -18,7 +22,6 @@ import java.util.List;
  * links de contato principais. Endereços/contatos adicionais residem
  * em {@link Address}.</p>
  */
-
 @Entity
 @Table(name = "profile")
 @EntityListeners(AuditingEntityListener.class)
@@ -40,7 +43,7 @@ public class Profile {
     private String headline;
 
     @Column(name = "bio", columnDefinition = "TEXT")
-    private String  bio;
+    private String bio;
 
     @Column(name = "photo_url", length = 500)
     private String photoUrl;
@@ -74,7 +77,6 @@ public class Profile {
      * da Home (ex: "Desenvolvedor Full Stack", "Engenheiro de Software").
      * Se vazia, o frontend usa {@code headline} como único texto.
      */
-
     @Builder.Default
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "profile_roles", joinColumns = @JoinColumn(name = "profile_id"))
@@ -84,14 +86,14 @@ public class Profile {
 
     @Builder.Default
     @Column(name = "available_for_work", nullable = false)
-    private boolean  availableForWork = true;
+    private boolean availableForWork = true;
 
     @Builder.Default
-    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Address> addresses = new ArrayList<>();
 
     @CreatedDate
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
