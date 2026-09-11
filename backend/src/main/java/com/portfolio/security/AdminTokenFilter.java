@@ -33,7 +33,7 @@ public class AdminTokenFilter extends HttpFilter {
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
-        // Se for preflight OPTIONS, deixa passar para o WebConfig injetar o CORS global
+        // 🚀 Se for preflight OPTIONS, deixa passar para o filtro de CORS injetar os headers globais
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             chain.doFilter(request, response);
             return;
@@ -73,10 +73,8 @@ public class AdminTokenFilter extends HttpFilter {
     }
 
     private boolean isValidToken(String providedToken) {
-        // Busca a variável de ambiente direto do Sistema Operacional (Railway)
         String envToken = System.getenv("ADMIN_TOKEN");
 
-        // Se a variável não estiver configurada no Railway por algum motivo, usa o padrão seguro
         if (envToken == null || envToken.trim().isEmpty()) {
             envToken = "meu-token-seguro-123";
         }

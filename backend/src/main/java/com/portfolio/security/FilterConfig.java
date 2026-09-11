@@ -11,9 +11,10 @@ public class FilterConfig {
     @Bean
     public FilterRegistrationBean<AdminTokenFilter> adminTokenFilterRegistration(AdminTokenFilter filter) {
         FilterRegistrationBean<AdminTokenFilter> registration = new FilterRegistrationBean<>(filter);
-        // Intercepta TODAS as requisições para garantir que o CORS funcione antes de qualquer rota
+        // Intercepta as requisições delegando a ordem correta para o ecossistema do Spring
         registration.addUrlPatterns("/*");
-        registration.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        // 🚀 Ajustado para executar imediatamente após o filtro do CORS
+        registration.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
         registration.setName("adminTokenFilter");
         return registration;
     }
