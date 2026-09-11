@@ -3,8 +3,8 @@ import type { ApiErrorResponse } from "../types/api";
 
 export const ADMIN_TOKEN_STORAGE_KEY = "portfolio.admin.token";
 
-// ALTERADO: Agora aponta para o contêiner correto com o ID -8016 e sufixo /api
-const baseURL = "https://railway.app";
+// Utiliza a variável de ambiente do Vite ou cai na URL exata do Railway
+const baseURL = import.meta.env.VITE_API_URL || "https://portfolio-fullstack-app-production-8016.up.railway.app";
 
 export const apiClient = axios.create({
   baseURL,
