@@ -6,7 +6,7 @@ spring:
     allow-bean-definition-overriding: true
 
   datasource:
-    url: ${DATABASE_PRIVATE_URL}
+    url: jdbc:${URL_DO_BANCO_DE_DADOS}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -33,7 +33,7 @@ spring:
       max-request-size: 12MB
 
 server:
-  port: 8080
+  port: ${PORT:8080}
   error:
     include-message: always
     include-binding-errors: always
