@@ -3,8 +3,8 @@ import type { ApiErrorResponse } from "../types/api";
 
 export const ADMIN_TOKEN_STORAGE_KEY = "portfolio.admin.token";
 
-// CORRIGIDO: Adicionado o /api estrito no final do link de fallback do Railway
-const baseURL = "/api";
+// CORRIGIDO: Usa a variável do Vite configurada na Vercel ou '/api' como fallback local
+const baseURL = import.meta.env.VITE_API_URL || "/api";
 
 export const apiClient = axios.create({
   baseURL,
