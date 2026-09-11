@@ -3,12 +3,12 @@ import type { ApiErrorResponse } from "../types/api";
 
 export const ADMIN_TOKEN_STORAGE_KEY = "portfolio.admin.token";
 
-// Utiliza a variável de ambiente do Vite ou cai na URL exata do Railway
-const baseURL = import.meta.env.VITE_API_URL || "https://portfolio-fullstack-app-production-8016.up.railway.app";
+// CORRIGIDO: Adicionado o /api estrito no final do link de fallback do Railway
+const baseURL = import.meta.env.VITE_API_URL || "https://portfolio-fullstack-app-production-8016.up.railway.app/api";
 
 export const apiClient = axios.create({
   baseURL,
-  timeout: 30000, // Mantido 30 segundos para evitar timeout com o banco do Railway
+  timeout: 30000,
   headers: {
     "Content-Type": "application/json",
   },
