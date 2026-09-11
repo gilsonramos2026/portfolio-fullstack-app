@@ -3,7 +3,9 @@ import type { ApiErrorResponse } from "../types/api";
 
 export const ADMIN_TOKEN_STORAGE_KEY = "portfolio.admin.token";
 
-const baseURL = import.meta.env.VITE_API_URL ?? "http://localhost:8080/api";
+// const baseURL = import.meta.env.VITE_API_URL ?? "http://localhost:8080/api";
+// Adicione esta:
+const baseURL = "/api";
 
 export const apiClient = axios.create({
   baseURL,
