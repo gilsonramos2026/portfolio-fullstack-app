@@ -4,10 +4,6 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * Registra explicitamente o {@link AdminTokenFilter} no contêiner de
- * servlets, restringindo sua atuação ao namespace {@code /api/*} da API.
- */
 @Configuration
 public class FilterConfig {
 
@@ -15,7 +11,7 @@ public class FilterConfig {
     public FilterRegistrationBean<AdminTokenFilter> adminTokenFilterRegistration(AdminTokenFilter filter) {
         FilterRegistrationBean<AdminTokenFilter> registration = new FilterRegistrationBean<>(filter);
         registration.addUrlPatterns("/api/*");
-        registration.setOrder(1);
+        registration.setOrder(10); // Executa após as configurações globais de CORS do Spring
         registration.setName("adminTokenFilter");
         return registration;
     }
