@@ -30,14 +30,14 @@ public class AdminTokenFilter extends HttpFilter {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Value("${portfolio.admin.token:${ADMIN_TOKEN:meu-token-seguro-123}}")
+    @Value("${ADMIN_TOKEN:meu-token-seguro-123}")
     private String configuredAdminToken;
 
     @Override
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
-        // Se for OPTIONS, apenas passa adiante sem barrar
+        // Se for preflight OPTIONS, deixa passar para o WebConfig injetar o CORS global
         if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             chain.doFilter(request, response);
             return;
@@ -91,7 +91,7 @@ public class AdminTokenFilter extends HttpFilter {
         body.put("timestamp", LocalDateTime.now().toString());
         body.put("status", HttpStatus.UNAUTHORIZED.value());
         body.put("error", "Unauthorized");
-        body.put("message", "Token administrativo ausente ou inválido. Envie o header X-Admin-Token correto.");
+        body.put("message", "Token administrativo ausente ou inválido.");
         body.put("path", request.getRequestURI());
 
         response.getWriter().write(objectMapper.writeValueAsString(body));
